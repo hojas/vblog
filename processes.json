@@ -1,0 +1,6 @@
+[{
+    "script": "app/app.js",
+    "name": "kblog",
+    "exec_mode" : "cluster",
+    "watch": true
+}]

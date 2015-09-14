@@ -1,0 +1,22 @@
+{
+  "name": "kblog",
+  "version": "1.0.0",
+  "description": "A blog build with koa.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hojas/kblog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hojas/kblog/issues"
+  },
+  "homepage": "https://github.com/hojas/kblog#readme",
+  "dependencies": {
+    "koa": "^1.0.0"
+  }
+}
