@@ -18,6 +18,8 @@
   "homepage": "https://github.com/hojas/kblog#readme",
   "dependencies": {
     "koa": "^1.1.2",
-    "mongoose": "^4.2.5"
+    "koa-router": "^5.2.3",
+    "mongoose": "^4.2.5",
+    "nunjucks": "^2.1.0"
   }
 }
