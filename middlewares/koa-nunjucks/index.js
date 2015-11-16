@@ -3,7 +3,7 @@
 const nunjucks = require('nunjucks');
 
 module.exports = function(path, opts) {
-    let env = nunjucks.configure(path, opts);
+    nunjucks.configure(path, opts);
 
     return function *(next) {
         var self = this;

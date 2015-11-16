@@ -19,6 +19,7 @@
   "dependencies": {
     "koa": "^1.1.2",
     "koa-router": "^5.2.3",
+    "koa-static": "^1.5.2",
     "mongoose": "^4.2.5",
     "nunjucks": "^2.1.0"
   }
