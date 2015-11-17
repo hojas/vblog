@@ -3,7 +3,8 @@ module.exports = function(app, router) {
 
     router.get('/', function *(next) {
         yield this.render('home/index.html', {
-            title: 'home page'
+            title: 'home page',
+            user: this.session.user
         });
         yield next;
     });
