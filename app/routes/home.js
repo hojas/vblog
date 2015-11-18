@@ -1,11 +1,20 @@
-module.exports = function(app, router) {
-    app.use(router.routes());
+'use strict';
 
+var Post = require('../models/post');
+
+module.exports = function(app, router) {
     router.get('/', function *(next) {
-        yield this.render('home/index.html', {
-            title: 'home page',
-            user: this.session.user
+        let self = this;
+        let posts = Post.findAll();
+
+        yield posts.then(function(posts) {
+            return self.render('home/index.html', {
+                ptitle: 'home page',
+                posts: posts,
+                user: self.session.user
+            });
         });
+
         yield next;
     });
 };

@@ -4,12 +4,8 @@ var koa = require('koa');
 var bodyParser = require('koa-bodyparser');
 var session = require('koa-session');
 var staticServer = require('koa-static');
-var router = require('koa-router')();
 var mongoose = require('mongoose');
-
-// routes
-var home = require('./routes/home');
-var user = require('./routes/user');
+var routes = require('./routes/routers');
 
 // local middlewares
 var nunjucks = require('../middlewares/koa-nunjucks/index');
@@ -17,17 +13,11 @@ var nunjucks = require('../middlewares/koa-nunjucks/index');
 // create app
 var app = koa();
 
-// session
-app.keys = ['some secret hurr'];
-app.use(session(app));
+mongoose.connect('mongodb://localhost:27017/kblog');
+mongoose.connection.on('error', console.error.bind(console, '连接数据库失败'));
 
 // config static dir
 app.use(staticServer(__dirname + '/public'));
-
-app.use(bodyParser());
-
-mongoose.connect('mongodb://localhost:27017/kblog');
-mongoose.connection.on('error', console.error.bind(console, '连接数据库失败'));
 
 // nunjucks config
 app.use(nunjucks('app/views', {
@@ -35,10 +25,11 @@ app.use(nunjucks('app/views', {
     watch: ! process.env.NODE_ENV === 'production'
 }));
 
-// run routes
-home(app, router);
-user(app, router);
-
+// session
+app.keys = ['some secret hurr'];
+app.use(session(app));
+app.use(bodyParser());
+routes(app);
 
 app.listen(8080);
 
