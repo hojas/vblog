@@ -17,7 +17,7 @@ CategorySchema.static('findByUrl', function(url) {
 
     return new Promise(function(resolve, reject) {
         self.findOne({ url: url }, function(err, cat) {
-            if (err) {
+            if (err || !cat) {
                 reject(err);
             } else {
                 resolve(cat);

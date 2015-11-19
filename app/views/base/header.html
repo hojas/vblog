@@ -11,14 +11,17 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/">首页</a></li>
-                <li><a href="/frontend">前端</a></li>
-                <li><a href="/nodejs">Node.js</a></li>
+                <li {% if not currentCat %}class="active"{% endif %}><a href="/">首页</a></li>
+                <li {% if currentCat == 'frontend' %}class="active"{% endif %}><a href="/frontend">前端</a></li>
+                <li {% if currentCat == 'nodejs' %}class="active"{% endif %}><a href="/nodejs">Node.js</a></li>
+                <li {% if currentCat == 'words' %}class="active"{% endif %}><a href="/words">文字</a></li>
             </ul>
+            {#
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/login">登录</a></li>
                 <li><a href="/signup">注册</a></li>
             </ul>
+            #}
         </div>
     </div>
 </nav>

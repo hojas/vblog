@@ -31,5 +31,12 @@ app.use(session(app));
 app.use(bodyParser());
 routes(app);
 
+app.use(function *(next) {
+    if (this.status === 404) {
+        this.body = '此页面不存在';
+    }
+    yield next;
+});
+
 app.listen(8080);
 

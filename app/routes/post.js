@@ -12,13 +12,19 @@ module.exports = function(app, router) {
         yield category.then(function(cat) {
             let posts = Post.findByCat(cat);
             return posts.then(function(posts) {
-                return self.render('home/index.html', {
+                return self.render('post/index.html', {
                     ptitle: 'home page',
+                    currentCat: cat.url,
                     posts: posts,
                     user: self.session.user
                 });
+            }, function() {
+                return next;
             });
-        })
+        }, function() {
+            return next;
+        });
+
         yield next;
     });
 };

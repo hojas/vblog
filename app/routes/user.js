@@ -34,6 +34,8 @@ module.exports = function(app, router) {
             } else {
                 return self.redirect('/login');
             }
+        }, function() {
+            return next;
         });
 
         yield next;
