@@ -1,9 +1,13 @@
 {% extends 'base/base.html' %}
 
 {% block body %}
-<div class="alert alert-success">{{ ptitle }}</div>
-{% for p in posts %}
-<div class="alert alert-info">{{ p.title }}</div>
-{% endfor %}
+    <div class="list-group">
+        {% for p in posts %}
+        <a href="/{{ p.url }}.html" class="list-group-item">
+            <h4 class="list-group-item-heading">{{ p.title }}</h4>
+            <p class="list-group-item-text">{{ p.content|summary }}</p>
+        </a>
+        {% endfor %}
+    </div>
 {% endblock %}
 

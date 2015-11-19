@@ -27,5 +27,19 @@ UserSchema.methods.add = function() {
     return p;
 };
 
+UserSchema.static('findByMail', function(email) {
+    let self = this;
+
+    return new Promise(function(resolve, reject) {
+        self.findOne({ email: email }, function(err, user) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(user);
+            }
+        });
+    });
+});
+
 module.exports = mongoose.model('User', UserSchema);
 

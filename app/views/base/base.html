@@ -14,8 +14,12 @@
     <![endif]-->
 </head>
 <body>
+    {% include './header.html' %}
+
+    <div class="container">
     {% block body %}
     {% endblock %}
+    </div>
 
     {% block js %}
     {% endblock %}

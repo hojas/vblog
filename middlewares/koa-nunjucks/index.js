@@ -3,7 +3,15 @@
 const nunjucks = require('nunjucks');
 
 module.exports = function(path, opts) {
-    nunjucks.configure(path, opts);
+    let env = nunjucks.configure(path, opts);
+
+    env.addFilter('summary', function(val) {
+        if (val.length > 300) {
+            return val.substr(0, 300) + '...';
+        } else {
+            return val;
+        }
+    });
 
     return function *(next) {
         var self = this;

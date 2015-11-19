@@ -51,11 +51,12 @@ PostSchema.methods.add = function() {
         });
     });
 };
-PostSchema.static('findAll', function() {
+PostSchema.static('findByCat', function(cat) {
     let self = this;
+    let current_cat = cat ? { category: cat.name } : {};
 
     return new Promise(function(resolve, reject) {
-        self.find({}, function(err, posts) {
+        self.find(current_cat, function(err, posts) {
             if (err) {
                 reject(err);
             } else {

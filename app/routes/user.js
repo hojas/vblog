@@ -7,7 +7,9 @@ var home = require('./home');
 module.exports = function(app, router) {
     router.get('/login', function *(next) {
         if (this.session.user) {
+            return this.redirect('/');
         }
+
         yield this.render('user/login.html', {
             title: '登录'
         });
@@ -20,15 +22,21 @@ module.exports = function(app, router) {
         let email = body.email;
         let password = body.password;
 
-        let user = User.findOne({ email: email }).exec();
+        let user = User.findByMail(email);
 
-        user.then(function(user) {
+        yield user.then(function(user) {
             if (user.password === md5(password)) {
                 user.password = null;
                 delete user.password;
                 self.session.user = user;
+
+                return self.redirect('/');
+            } else {
+                return self.redirect('/login');
             }
         });
+
+        yield next;
     });
 };
 

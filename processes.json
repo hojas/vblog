@@ -1,6 +1,10 @@
 [{
     "script": "app/app.js",
     "name": "kblog",
+    "log_file": "logs/blog.log",
+    "error_log": "logs/blog-err.log",
+    "out_file": "logs/blog-out.log",
+    "pid_file": "logs/blog.pid",
     "exec_mode" : "cluster",
     "watch": true
 }]
