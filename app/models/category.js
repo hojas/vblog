@@ -5,11 +5,9 @@ var Schema = mongoose.Schema;
 var moment = require('moment');
 
 var CategorySchema = new Schema({
-    name: String, // 名称
-    url: String, // url
-    index: Number, // 排序指数
-    total: { type: Number, default: 0 }, // 文章总数
-    create_time: { type: Date, default: Date.now } // 创建时间
+    url: String,
+    name: String,
+    index: Number,
 });
 
 CategorySchema.static('findByUrl', function(url) {
@@ -18,7 +16,7 @@ CategorySchema.static('findByUrl', function(url) {
     return new Promise(function(resolve, reject) {
         self.findOne({ url: url }, function(err, cat) {
             if (err || !cat) {
-                reject(err);
+                reject(err || '此分类不存在');
             } else {
                 resolve(cat);
             }

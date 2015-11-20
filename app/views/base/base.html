@@ -4,7 +4,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>前端日志网</title>
+    {% if ptitle %}
+    <title>{{ ptitle }} - 前端日志网</title>
+    {% else %}
+    <title>前端日志网 - 一个前端开发者的个人博客</title>
+    {% endif %}
+    <meta name="description" content="前端日志网是一个前端开发者的个人博客网站，致力于分享前端开发技术和Node.js技术。">
+    <meta name="keywords" content="前端开发,JavaScript,CSS,Node.js">
     <link href="/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     {% block css %}
     {% endblock %}

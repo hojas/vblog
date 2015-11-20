@@ -8,23 +8,21 @@ var UserSchema = new Schema({
     username: String,
     email: String,
     password: String,
-    create_time: { type: Date, default: Date.now }
 });
 
 UserSchema.methods.add = function() {
-    let p = new Promise();
-
+    let self = this;
     this.password = md5(this.password);
 
-    this.save(function(err, data) {
-        if (err) {
-            p.reject(err);
-        } else {
-            p.resolve(null, data);
-        }
+    return new Promise(function(resolve, reject) {
+        self.save(function(err, data) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(data);
+            }
+        });
     });
-
-    return p;
 };
 
 UserSchema.static('findByMail', function(email) {

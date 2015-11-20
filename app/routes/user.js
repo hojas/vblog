@@ -11,7 +11,7 @@ module.exports = function(app, router) {
         }
 
         yield this.render('user/login.html', {
-            title: '登录'
+            ptitle: '登录'
         });
         yield next;
     });
