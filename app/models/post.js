@@ -16,12 +16,6 @@ var PostSchema = new Schema({
     create_time: { type: Date, default: Date.now },
 });
 
-marked.setOptions({
-    highlight: function (code) {
-        return require('highlight.js').highlightAuto(code).value;
-    }
-});
-
 PostSchema.virtual('pretty_create_time').get(function() {
     return moment(this.create_time).fromNow();
 });

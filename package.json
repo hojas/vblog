@@ -27,5 +27,10 @@
     "moment": "^2.10.6",
     "mongoose": "^4.2.5",
     "nunjucks": "^2.1.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-util": "^3.0.7",
+    "webpack": "^1.12.6"
   }
 }
