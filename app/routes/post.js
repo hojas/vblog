@@ -39,7 +39,11 @@ module.exports = function(app, router) {
                 post: post,
                 user: self.session.user
             });
+        }, function() {
+            return next;
         });
+
+        yield next;
     });
 };
 
