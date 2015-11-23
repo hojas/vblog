@@ -15,10 +15,7 @@ gulp.task('compass', function() {
             config_file: './app/public/css/config.rb',
             css: 'app/public/css/stylesheets',
             sass: 'app/public/css/sass'
-        }))
-        .pipe(minifyCss())
-        .pipe(rename({ suffix: '.min' }))
-        .pipe(gulp.dest('app/public/css'));
+        }));
 });
 
 gulp.task('webpack', function(callback) {
