@@ -2,6 +2,7 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var moment = require('moment');
 var marked = require('marked');
 var Category = require('./category');
 
@@ -13,14 +14,12 @@ var PostSchema = new Schema({
     category: { name: String, url: String },
     tags: { type: Array, default: [] },
     views: { type: Number, default: 0 },
-    create_time: { type: Date, default: Date.now },
+    createdAt: { type: Date, default: Date.now },
 });
 
-PostSchema.virtual('pretty_create_time').get(function() {
-    return moment(this.create_time).fromNow();
-});
-PostSchema.virtual('prettyCat').get(function() {
-    return moment(this.create_time).fromNow();
+PostSchema.virtual('pretty_createdAt').get(function() {
+    moment.locale('zh-cn');
+    return moment(this.create_time).format('ll');
 });
 PostSchema.virtual('markedContent').get(function() {
     return marked(this.content);
@@ -41,7 +40,6 @@ PostSchema.methods.increaseViews = function() {
         });
     });
 };
-
 PostSchema.methods.add = function() {
     let self = this;
 
@@ -55,6 +53,7 @@ PostSchema.methods.add = function() {
         });
     });
 };
+
 PostSchema.static('findByCat', function(cat) {
     let self = this;
     let current_cat = cat ? { category: { name: cat.name, url: cat.url }} : {};
@@ -80,6 +79,19 @@ PostSchema.static('findById', function(id) {
                 reject(err);
             } else {
                 resolve(post);
+            }
+        });
+    });
+});
+PostSchema.static('findByTag', function(tag) {
+    let self = this;
+
+    return new Promise(function(resolve, reject) {
+        self.find({ tags: { $in: [tag] } }, function(err, posts) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(posts);
             }
         });
     });

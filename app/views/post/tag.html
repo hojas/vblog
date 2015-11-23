@@ -1,0 +1,10 @@
+{% extends 'base/base.html' %}
+{% from '../modules/post-item.html' import postItem %}
+
+{% block body %}
+    <div class="container">
+        <h4>与 "{{ tag }}" 标签相关的文章：</h4>
+    </div>
+    {{ postItem(posts) }}
+{% endblock %}
+

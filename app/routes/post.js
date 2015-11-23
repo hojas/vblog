@@ -45,5 +45,24 @@ module.exports = function(app, router) {
 
         yield next;
     });
+
+    router.get('/tag/:tag', function *(next) {
+        let self = this;
+        let tag = this.params.tag;
+        let posts = Post.findByTag(tag);
+
+        yield posts.then(function(posts) {
+            return self.render('post/tag.html', {
+                ptitle: tag,
+                tag: tag,
+                posts: posts,
+                user: self.session.user,
+            });
+        }, function() {
+            return next;
+        });
+
+        yield next;
+    });
 };
 

@@ -1,8 +1,10 @@
 {% extends 'base/base.html' %}
+{% from '../modules/post-meta.html' import postMeta %}
 
 {% block body %}
 <div class="post-details">
-    <h4>{{ ptitle }}</h4>
+    <h2>{{ ptitle }}</h2>
+    {{ postMeta(post) }}
     <div>{{ post.markedContent|safe }}</div>
 </div>
 {% endblock %}
