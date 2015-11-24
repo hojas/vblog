@@ -88,7 +88,7 @@ PostSchema.static('findByTag', function(tag) {
 
     return new Promise(function(resolve, reject) {
         self.find({ tags: { $in: [tag] } }, function(err, posts) {
-            if (err) {
+            if (err || !posts.length) {
                 reject(err);
             } else {
                 resolve(posts);
