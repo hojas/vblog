@@ -21,7 +21,7 @@ module.exports = {
         ],
     },
     jshint: {
-        camelcase: true,
+        //camelcase: true,
         emitErrors: true,
         failOnHint: false,
     },

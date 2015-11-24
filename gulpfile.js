@@ -28,7 +28,7 @@ gulp.task('webpack', function(callback) {
 });
 
 gulp.task('default', ['compass', 'webpack'], function() {
-    gulp.watch('./app/public/css/sass/**/*.scss', ['compass']);
-    gulp.watch('./app/public/js/**/*.js', ['webpack']);
+//    gulp.watch('./app/public/css/sass/**/*.scss', ['compass']);
+//    gulp.watch('./app/public/js/**/*.js', ['webpack']);
 });
 

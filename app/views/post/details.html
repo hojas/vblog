@@ -1,11 +1,37 @@
 {% extends 'base/base.html' %}
 {% from '../modules/post-meta.html' import postMeta %}
 
+{% set postUrl = 'http://www.w3clog.com/' + post.id + '.html' %}
+
 {% block body %}
 <div class="post-details">
-    <h2>{{ ptitle }}</h2>
+    <h2 class="post-title">{{ ptitle }}</h2>
     {{ postMeta(post) }}
-    <div>{{ post.markedContent|safe }}</div>
+    <hr>
+    <div class="post-content">
+        {{ post.markedContent|safe }}
+        <div>
+            <span>转载请注明出处：</span>
+            <a href="http://www.w3clog.com/">前端日志网</a>
+            <i class="fa fa-angle-double-right"></i>
+            <a href="{{ postUrl }}">{{ ptitle }}</a>
+        </div>
+    </div>
 </div>
+<div class="ds-thread" data-thread-key="{{ post.id }}" data-title="{{ ptitle }}" data-url="{{ postUrl }}"></div>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"w3clog"};
+(function() {
+ var ds = document.createElement('script');
+ ds.type = 'text/javascript';ds.async = true;
+ ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+ ds.charset = 'UTF-8';
+ (document.getElementsByTagName('head')[0]
+  || document.getElementsByTagName('body')[0]).appendChild(ds);
+ })();
+</script>
 {% endblock %}
 

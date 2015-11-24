@@ -2,9 +2,9 @@
 {% from '../modules/post-item.html' import postItem %}
 
 {% block body %}
-    <div class="container">
-        <h4>与 "{{ tag }}" 标签相关的文章：</h4>
-    </div>
+    <h4>与 "{{ tag }}" 标签相关的文章：</h4>
+    <hr>
+    <br>
     {{ postItem(posts) }}
 {% endblock %}
 
