@@ -14,6 +14,9 @@ function init() {
     editor.getSession().setTabSize(4);
     editor.getSession().setUseWrapMode(true);
 
+    var data = $('.post-origin').val();
+    editor.setValue(data);
+
 
     $('.addpost').on('click', function() {
         var content = editor.getValue();
@@ -21,11 +24,15 @@ function init() {
         var category = $('[name=category]').val();
         var tags = $('[name=tags]').val();
 
-        $.post('/new', {
-            title: title,
-            content: content,
-            tags: tags,
-            category: category
+        var method = /edit$/.test(location.pathname) ? 'update' : 'add';
+
+        $.post(location.pathname, {
+            post: {
+                title: title,
+                content: content,
+                tags: tags,
+                category: category
+            }
         })
         .done(function(data) {
             if (data && data.next) {

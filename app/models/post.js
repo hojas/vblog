@@ -35,7 +35,7 @@ PostSchema.methods.increaseViews = function() {
             if (err) {
                 reject(err);
             } else {
-                resolve(data);
+                resolve(self);
             }
         });
     });
@@ -49,6 +49,20 @@ PostSchema.methods.add = function() {
                 reject(err);
             } else {
                 resolve(data);
+            }
+        });
+    });
+};
+PostSchema.methods.update = function(post) {
+    let self = this;
+    let q = { _id: this._id };
+
+    return new Promise(function(resolve, reject) {
+        self.constructor.update(q, post, function(err, data) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(self);
             }
         });
     });
@@ -75,7 +89,7 @@ PostSchema.static('findById', function(id) {
 
     return new Promise(function(resolve, reject) {
         self.findOne({ id: id }, function(err, post) {
-            if (err) {
+            if (err || !post) {
                 reject(err);
             } else {
                 resolve(post);

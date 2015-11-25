@@ -34,10 +34,14 @@ module.exports = function(app, router) {
         let post = Post.findById(id);
 
         yield post.then(function(post) {
-            return self.render('post/details.html', {
-                ptitle: post.title,
-                post: post,
-                user: self.session.user
+            return post.increaseViews().then(function(post) {
+                return self.render('post/details.html', {
+                    ptitle: post.title,
+                    post: post,
+                    user: self.session.user
+                });
+            }, function() {
+                return next
             });
         }, function() {
             return next;
@@ -122,6 +126,60 @@ module.exports = function(app, router) {
         });
 
         yield next;
+    });
+
+    router.get('/:id/edit', function *(next) {
+        if (! this.session.user) {
+            return next;
+        }
+
+        let self = this;
+        let id = this.params.id;
+        let post = Post.findById(id);
+        let cats = Category.findAll();
+
+        yield post.then(function(post) {
+            return cats.then(function(cats) {
+                return self.render('post/new.html', {
+                    ptitle: post.title,
+                    cats: cats,
+                    post: post,
+                    user: self.session.user,
+                });
+            }, function() {
+                return next;
+            });
+        }, function() {
+            return next;
+        });
+
+        yield next;
+    });
+
+    router.post('/:id/edit', function *(next) {
+        if (! this.session.user) {
+            return next;
+        }
+
+        let self = this;
+        let id = this.params.id;
+        let post = Post.findById(id);
+        let update = this.request.body.post;
+        let category = update.category.split(',');
+
+        update.category = { name: category[0], url: category[1] }
+
+        yield post.then(function(post) {
+            return post.update(update).then(function(post) {
+                return self.body = { next: '/' + post.id + '.html' };
+            }, function() {
+                return next;
+            });
+        }, function() {
+            return next;
+        });
+
+        return next;
     });
 };
 

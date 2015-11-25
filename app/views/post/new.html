@@ -14,14 +14,17 @@
             </div>
             <div class="form-group">
                 <label>标签：</label>
-                <input class="form-control" type="text" name="tags">
+                <input class="form-control" type="text" name="tags" value="{{ post.tags or '' }}">
             </div>
             <button class="btn btn-default addpost">发布</button>
         </form>
     </div>
-    <input type="text" class="form-control" name="title" placeholder="文章标题">
+    <input type="text" class="form-control" name="title" placeholder="文章标题" value="{{ post.title or '' }}">
     <div class="col-md-12" id="post-editor"></div>
 </div>
+{% if post %}
+<textarea class="post-origin" cols="0" rows="0">{{ post.content }}</textarea>
+{% endif %}
 {% endblock %}
 
 {% block js %}
