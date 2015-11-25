@@ -14,8 +14,14 @@
                 <li {% if not currentCat %}class="active"{% endif %}><a href="/">首页</a></li>
                 <li {% if currentCat == 'frontend' %}class="active"{% endif %}><a href="/frontend">前端</a></li>
                 <li {% if currentCat == 'nodejs' %}class="active"{% endif %}><a href="/nodejs">Node.js</a></li>
+                <li {% if currentCat == 'algorithm' %}class="active"{% endif %}><a href="/algorithm">算法</a></li>
                 <li {% if currentCat == 'words' %}class="active"{% endif %}><a href="/words">文字</a></li>
             </ul>
+            {% if user %}
+            <ul class="nav navbar-nav navbar-right">
+                <li><a>Hi, {{ user.username }}</a></li>
+            </ul>
+            {% endif %}
             {#
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/login">登录</a></li>

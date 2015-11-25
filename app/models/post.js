@@ -96,6 +96,19 @@ PostSchema.static('findByTag', function(tag) {
         });
     });
 });
+PostSchema.static('postCounts', function() {
+    let self = this;
+
+    return new Promise(function(resolve, reject) {
+        self.count({}, function(err, count) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(count);
+            }
+        });
+    });
+});
 
 module.exports = mongoose.model('Post', PostSchema);
 

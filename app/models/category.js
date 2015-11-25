@@ -24,5 +24,19 @@ CategorySchema.static('findByUrl', function(url) {
     });
 });
 
+CategorySchema.static('findAll', function() {
+    let self = this;
+
+    return new Promise(function(resolve, reject) {
+        self.find({}, function(err, cats) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(cats);
+            }
+        });
+    });
+});
+
 module.exports = mongoose.model('Category', CategorySchema);
 

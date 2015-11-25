@@ -1,0 +1,30 @@
+{% extends 'base/base.html' %}
+
+{% block body %}
+<div class="row post-new">
+    <div class="col-md-12" id="post-toolbar">
+        <form class="form-inline">
+            <div class="form-group">
+                <label>分类：</label>
+                <select class="form-control" name="category">
+                    {% for c in cats %}
+                    <option value="{{ c.name + ',' + c.url }}">{{ c.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label>标签：</label>
+                <input class="form-control" type="text" name="tags">
+            </div>
+            <button class="btn btn-default addpost">发布</button>
+        </form>
+    </div>
+    <input type="text" class="form-control" name="title" placeholder="文章标题">
+    <div class="col-md-12" id="post-editor"></div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="/js/dest/new.js"></script>
+{% endblock %}
+
