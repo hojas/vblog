@@ -7,21 +7,19 @@ module.exports = function(app, router) {
     router.get('/:cat', function *(next) {
         let self = this;
         let catUrl = this.params.cat;
-        let category = Category.findByUrl(catUrl);
+        let ptitle;
 
-        yield category.then(function(cat) {
-            let posts = Post.findByCat(cat);
-            return posts.then(function(posts) {
-                return self.render('post/index.html', {
-                    ptitle: cat.name,
-                    currentCat: catUrl,
-                    posts: posts,
-                    user: self.session.user
-                });
-            }, function() {
-                return next;
+        yield Category.findByUrl(catUrl).then(function(cat) {
+            ptitle = cat.name;
+            return Post.findByCat(cat);
+        }).then(function(posts) {
+            return self.render('post/index.html', {
+                ptitle: ptitle,
+                currentCat: catUrl,
+                posts: posts,
+                user: self.session.user
             });
-        }, function() {
+        }).catch(function() {
             return next;
         });
 
@@ -31,19 +29,16 @@ module.exports = function(app, router) {
     router.get('/:id'+'.html', function *(next) {
         let self = this;
         let id = this.params.id;
-        let post = Post.findById(id);
 
-        yield post.then(function(post) {
-            return post.increaseViews().then(function(post) {
-                return self.render('post/details.html', {
-                    ptitle: post.title,
-                    post: post,
-                    user: self.session.user
-                });
-            }, function() {
-                return next
+        yield Post.findById(id).then(function(post) {
+            return post.increaseViews();
+        }).then(function(post) {
+            return self.render('post/details.html', {
+                ptitle: post.title,
+                post: post,
+                user: self.session.user
             });
-        }, function() {
+        }).catch(function() {
             return next;
         });
 
@@ -53,9 +48,8 @@ module.exports = function(app, router) {
     router.get('/tag/:tag', function *(next) {
         let self = this;
         let tag = this.params.tag;
-        let posts = Post.findByTag(tag);
 
-        yield posts.then(function(posts) {
+        yield Post.findByTag(tag).then(function(posts) {
             return self.render('post/tag.html', {
                 ptitle: tag,
                 tag: tag,
@@ -75,9 +69,8 @@ module.exports = function(app, router) {
         }
 
         let self = this;
-        let cats = Category.findAll();
 
-        yield cats.then(function(cats) {
+        yield Category.findAll().then(function(cats) {
             return self.render('post/new.html', {
                 ptitle: '写文章',
                 cats: cats,
@@ -97,31 +90,26 @@ module.exports = function(app, router) {
 
         let self = this;
         let body = this.request.body;
-        let title = body.title;
-        let content = body.content;
         let tags = body.tags.split(/\s*,\s*/);
         let category = body.category.split(',');
 
         category = { name: category[0], url: category[1] }
 
-        let count = Post.postCounts();
+        let post = new Post({
+            id: 0,
+            title: body.title,
+            content: body.content,
+            author: self.session.user.username,
+            category: category,
+            tags: tags,
+        });
 
-        yield count.then(function(count) {
-            let post = new Post({
-                id: count + 1,
-                title: title,
-                content: content,
-                author: self.session.user.username,
-                category: category,
-                tags: tags,
-            });
-
-            return post.add().then(function(post) {
-                return self.body = { next: '/' + post.id + '.html' };
-            }, function() {
-                return next;
-            });
-        }, function() {
+        yield Post.postCounts().then(function(count) {
+            post.id = count + 1;
+            return post.add();
+        }).then(function(post) {
+            return self.body = { next: '/' + post.id + '.html' };
+        }).catch(function() {
             return next;
         });
 
@@ -135,21 +123,19 @@ module.exports = function(app, router) {
 
         let self = this;
         let id = this.params.id;
-        let post = Post.findById(id);
-        let cats = Category.findAll();
+        let oPost;
 
-        yield post.then(function(post) {
-            return cats.then(function(cats) {
-                return self.render('post/new.html', {
-                    ptitle: post.title,
-                    cats: cats,
-                    post: post,
-                    user: self.session.user,
-                });
-            }, function() {
-                return next;
+        yield Post.findById(id).then(function(post) {
+            oPost = post;
+            return Category.findAll();
+        }).then(function(cats) {
+            return self.render('post/new.html', {
+                ptitle: oPost.title,
+                cats: cats,
+                post: oPost,
+                user: self.session.user,
             });
-        }, function() {
+        }).catch(function() {
             return next;
         });
 
@@ -163,19 +149,15 @@ module.exports = function(app, router) {
 
         let self = this;
         let id = this.params.id;
-        let post = Post.findById(id);
         let update = this.request.body.post;
-        let category = update.category.split(',');
 
         update.category = { name: category[0], url: category[1] }
 
-        yield post.then(function(post) {
-            return post.update(update).then(function(post) {
-                return self.body = { next: '/' + post.id + '.html' };
-            }, function() {
-                return next;
-            });
-        }, function() {
+        yield Post.findById(id).then(function(post) {
+            return post.update(update);
+        }).then(function(post) {
+            return self.body = { next: '/' + post.id + '.html' };
+        }).catch(function() {
             return next;
         });
 

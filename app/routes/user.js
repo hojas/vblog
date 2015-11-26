@@ -22,9 +22,7 @@ module.exports = function(app, router) {
         let email = body.email;
         let password = body.password;
 
-        let user = User.findByMail(email);
-
-        yield user.then(function(user) {
+        yield User.findByMail(email).then(function(user) {
             if (user.password === md5(password)) {
                 user.password = null;
                 delete user.password;
