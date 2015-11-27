@@ -89,7 +89,7 @@ module.exports = function(app, router) {
         }
 
         let self = this;
-        let body = this.request.body;
+        let body = this.request.body.post;
         let tags = body.tags.split(/\s*,\s*/);
         let category = body.category.split(',');
 
