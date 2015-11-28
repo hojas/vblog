@@ -7,6 +7,7 @@ require('brace/theme/monokai');
 init();
 
 function init() {
+    // 初始化编辑框
     var editor = ace.edit('post-editor');
 
     editor.setTheme('ace/theme/monokai');
@@ -23,8 +24,6 @@ function init() {
         var title = $('[name=title]').val();
         var category = $('[name=category]').val();
         var tags = $('[name=tags]').val();
-
-        var method = /edit$/.test(location.pathname) ? 'update' : 'add';
 
         $.post(location.pathname, {
             post: {

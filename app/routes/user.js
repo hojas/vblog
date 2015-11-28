@@ -5,6 +5,8 @@ var User = require('../models/user');
 var home = require('./home');
 
 module.exports = function(app, router) {
+
+    // 登录页
     router.get('/login', function *(next) {
         if (this.session.user) {
             return this.redirect('/');
@@ -16,6 +18,7 @@ module.exports = function(app, router) {
         yield next;
     });
 
+    // 登录
     router.post('/login', function *(next) {
         let self = this;
         let body = this.request.body;

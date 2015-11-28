@@ -28,9 +28,12 @@ app.use(nunjucks('app/views', {
 // session
 app.keys = ['some secret hurr'];
 app.use(session(app));
+// body parser
 app.use(bodyParser());
+// routes
 routes(app);
 
+// catch 404
 app.use(function *(next) {
     if (this.status === 404) {
         this.body = '此页面不存在';
