@@ -9,6 +9,8 @@ var compass = require('gulp-compass');
 var webpack = require('webpack');
 var webpackConfig = require('./webpack.config');
 
+
+// build sass
 gulp.task('compass', function() {
     gulp.src('./app/public/css/sass/**/*.scss')
         .pipe(compass({
@@ -18,17 +20,14 @@ gulp.task('compass', function() {
         }));
 });
 
-gulp.task('webpack', function(callback) {
+// run webpack
+gulp.task('webpack', function() {
     webpack(webpackConfig, function(err, stats) {
         if (err) throw new util.PluginError('webpack', err);
-        util.log('[webpack]', stats.toString({
-        }));
-        callback && callback();
     });
 });
 
 gulp.task('default', ['compass', 'webpack'], function() {
-//    gulp.watch('./app/public/css/sass/**/*.scss', ['compass']);
-//    gulp.watch('./app/public/js/**/*.js', ['webpack']);
+    gulp.watch('./app/public/css/sass/**/*.scss', ['compass']);
 });
 

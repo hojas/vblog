@@ -4,7 +4,8 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-    devtool: 'source-map',
+    devtool: '#source-map',
+    watch: true,
     entry: {
         details: './app/public/js/post/details.js',
         new: './app/public/js/post/new.js',
