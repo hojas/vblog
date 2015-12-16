@@ -9,5 +9,6 @@ module.exports = function(app) {
     require('./home')(app, router);
     require('./user')(app, router);
     require('./post')(app, router);
+    require('./page')(app, router);
 };
 

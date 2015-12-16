@@ -159,7 +159,9 @@ module.exports = function(app, router) {
         let self = this;
         let id = this.params.id;
         let update = this.request.body.post;
+        let category = update.category.split(',');
 
+        update.tags = update.tags.split(/\s*,\s*/);
         update.category = { name: category[0], url: category[1] }
 
         yield Post.findById(id).then(function(post) {
