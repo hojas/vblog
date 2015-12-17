@@ -19,7 +19,7 @@ var PostSchema = new Schema({
 
 PostSchema.virtual('pretty_createdAt').get(function() {
     moment.locale('zh-cn');
-    return moment(this.create_time).format('ll');
+    return moment(this.createdAt).format('ll');
 });
 PostSchema.virtual('markedContent').get(function() {
     return marked(this.content);
