@@ -1,10 +1,16 @@
-[{
-    "script": "app/app.js",
-    "name": "kblog",
-    "log_file": "logs/blog.log",
-    "error_log": "logs/blog-err.log",
-    "out_file": "logs/blog-out.log",
-    "pid_file": "logs/blog.pid",
-    "exec_mode" : "cluster",
-    "watch": true
-}]
+{
+    "apps": [{
+        "name": "kblog",
+        "script": "./app/app.js",
+        "watch": true,
+        "env": {
+            "NODE_ENV": "production"
+        },
+        "exec_mode" : "cluster_mode",
+        "log_file": "./logs/log/blog.log",
+        "error_log": "./logs/err/blog-err.log",
+        "out_file": "./logs/out/blog-out.log",
+        "pid_file": "./logs/pid/blog.pid"
+    }]
+}
+

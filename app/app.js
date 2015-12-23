@@ -42,8 +42,8 @@ app.use(function *(next) {
 });
 
 // for test
-app.listen(8080);
+//app.listen(8080);
 
 // for production
-//app.listen(8080, '127.0.0.1');
+app.listen(8080, '127.0.0.1');
 
