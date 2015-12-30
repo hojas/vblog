@@ -24,7 +24,7 @@ gulp.task('compass', function() {
             sass: 'sass',
         }))
         .pipe(autoprefixer({
-            browsers: ['last 2 version'],
+            browsers: ['last 2 versions'],
         }))
         .pipe(minifyCss())
         .pipe(gulp.dest('stylesheets'));
