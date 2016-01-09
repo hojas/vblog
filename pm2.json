@@ -1,0 +1,17 @@
+{
+    "apps": [{
+        "name"            : "kblog",
+        "script"          : "app/app.js",
+        "exec_mode"       : "cluster_mode",
+        "instances"       : 0,
+        "exec_interpreter": "node",
+        "error_file"      : "logs/err.log",
+        "out_file"        : "logs/out.log",
+        "merge_logs"      : true,
+        "log_date_format" : "YYYY-MM-DD HH:mm Z",
+        "watch"           : true,
+        "env": {
+            "NODE_ENV": "production"
+        },
+    }]
+}
