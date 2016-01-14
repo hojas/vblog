@@ -35,9 +35,14 @@ routes(app);
 
 // catch 404
 app.use(function *(next) {
+    let self = this;
+
     if (this.status === 404) {
-        this.body = '此页面不存在';
+        return self.render('page/404.html', {
+            user: self.session.user,
+        });
     }
+
     yield next;
 });
 

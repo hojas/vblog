@@ -1,33 +1,34 @@
 'use strict';
 
+var fs            = require('fs');
 var path          = require('path');
-
 var gulp          = require('gulp');
+
+var postcss       = require('gulp-postcss');
+var autoprefixer  = require('autoprefixer');
+var cssnext       = require('cssnext');
+var precss        = require('precss');
+var modules       = require('postcss-modules');
+var inlineComment = require('postcss-inline-comment');
+var cssnano       = require('cssnano');
+
 var util          = require('gulp-util');
-var rename        = require('gulp-rename');
-var uglify        = require('gulp-uglify');
-
-var minifyCss     = require('gulp-minify-css');
-var compass       = require('gulp-compass');
-var autoprefixer  = require('gulp-autoprefixer');
-
 var webpack       = require('webpack');
 var webpackConfig = require('./webpack.config');
 
 
-// build sass
-gulp.task('compass', function() {
-    gulp.src('./app/public/css/sass/**/*.scss')
-        .pipe(compass({
-            project: path.join(__dirname, 'app/public/css'),
-            css: 'stylesheets',
-            sass: 'sass',
-        }))
-        .pipe(autoprefixer({
-            browsers: ['last 2 versions'],
-        }))
-        .pipe(minifyCss())
-        .pipe(gulp.dest('stylesheets'));
+gulp.task('css', function() {
+    let processors = [
+        autoprefixer({ browsers: ['last 2 versions'] }),
+        cssnext,
+        precss,
+        inlineComment(),
+        cssnano(),
+    ];
+
+    return gulp.src('./app/public/css/src/app.css')
+        .pipe(postcss(processors))
+        .pipe(gulp.dest('./app/public/css/dest'));
 });
 
 // run webpack
@@ -38,7 +39,5 @@ gulp.task('webpack', function() {
     });
 });
 
-gulp.task('default', ['compass', 'webpack'], function() {
-    gulp.watch('./app/public/css/sass/**/*.scss', ['compass']);
-});
+gulp.task('default', ['css', 'webpack']);
 
