@@ -8,7 +8,8 @@
                 <label>分类：</label>
                 <select class="form-control" name="category">
                     {% for c in cats %}
-                    <option value="{{ c.name + ',' + c.url }}">{{ c.name }}</option>
+                    <option {% if post.category and post.category.url == c.url %}selected{% endif %}
+                        value="{{ c.name + ',' + c.url }}">{{ c.name }}</option>
                     {% endfor %}
                 </select>
             </div>

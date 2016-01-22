@@ -4,8 +4,6 @@ var Category = require('../models/category');
 var Post = require('../models/post');
 
 module.exports = function(app, router) {
-
-    // 获取分类下所有文章
     // TODO 添加分页功能
     router.get('/:cat', function *(next) {
         let self = this;
@@ -29,7 +27,6 @@ module.exports = function(app, router) {
         yield next;
     });
 
-    // 文章详情页
     router.get('/:id'+'.html', function *(next) {
         let self = this;
         let id = this.params.id;
@@ -49,7 +46,6 @@ module.exports = function(app, router) {
         yield next;
     });
 
-    // 根据标签获取文章
     router.get('/tag/:tag', function *(next) {
         let self = this;
         let tag = this.params.tag;
@@ -68,7 +64,6 @@ module.exports = function(app, router) {
         yield next;
     });
 
-    // 发表文章页
     router.get('/new', function *(next) {
         if (! this.session.user) {
             return next;
@@ -88,8 +83,6 @@ module.exports = function(app, router) {
 
         yield next;
     });
-
-    // 发表新文章
     router.post('/new', function *(next) {
         if (! this.session.user) {
             return next;
@@ -123,7 +116,6 @@ module.exports = function(app, router) {
         yield next;
     });
 
-    // 编辑文章页
     router.get('/:id/edit', function *(next) {
         if (! this.session.user) {
             return next;
@@ -149,8 +141,6 @@ module.exports = function(app, router) {
 
         yield next;
     });
-
-    // 编辑文章
     router.post('/:id/edit', function *(next) {
         if (! this.session.user) {
             return next;
