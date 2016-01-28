@@ -1,0 +1,54 @@
+{% extends 'base/base.html' %}
+
+{% block body %}
+<div class="page-header">
+    <h2>前端日志网 - 一个前端开发者的个人博客's SiteMap</h2>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">最新文章</h3>
+    </div>
+    <ul class="list-group">
+        {%- for p in posts %}
+        <li class="list-group-item">
+            <a href="/{{ p.id }}.html" title="{{ p.title }}" target="_blank">{{ p.title }}</a>
+        </li>
+        {%- endfor %}
+    </ul>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">分类目录</h3>
+    </div>
+    <ul class="list-group">
+        {%- for c in cats %}
+        <li class="list-group-item">
+            <a href="/{{ c.url }}" title="{{ c.name }}" target="_blank">{{ c.name }}</a>
+        </li>
+        {%- endfor %}
+    </ul>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">页面</h3>
+    </div>
+    <ul class="list-group">
+        {%- for p in pages %}
+        <li class="list-group-item">
+            <a href="{{ p.url }}" title="{{ p.title }}" target="_blank">{{ p.title }}</a>
+        </li>
+        {%- endfor %}
+    </ul>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">标签</h3>
+    </div>
+    <div class="panel-body">
+        {%- for t in tags %}
+        <a href="/tag/{{ t.name }}" title="{{ t.name }}" target="_blank">{{ t.name }}</a>
+        {%- endfor %}
+    </ul>
+</div>
+{% endblock %}
+

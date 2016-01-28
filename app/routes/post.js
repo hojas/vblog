@@ -2,6 +2,7 @@
 
 var Category = require('../models/category');
 var Post = require('../models/post');
+var Tag = require('../models/tag');
 
 module.exports = function(app, router) {
     // TODO 添加分页功能
