@@ -9,6 +9,7 @@ module.exports = function(app, router) {
         let self = this;
 
         yield this.render('page/about.html', {
+            ptitle: '关于',
             currentCat: 'about',
             user: self.session.user
         });
