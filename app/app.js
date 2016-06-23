@@ -3,6 +3,7 @@
 var koa = require('koa');
 var bodyParser = require('koa-bodyparser');
 var session = require('koa-session');
+var compress = require('koa-compress');
 var staticServer = require('koa-static');
 var mongoose = require('mongoose');
 var routes = require('./routes/routers');
@@ -45,6 +46,14 @@ app.use(function *(next) {
 
     yield next;
 });
+
+app.use(compress({
+    filter: function(ct) {
+        return /text/i.test(ct);
+    },
+    threshold: 2048,
+    flush: require('zlib').L_SYNC_FLUSH
+}));
 
 // for test
 //app.listen(8080);
