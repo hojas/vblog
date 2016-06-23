@@ -1,9 +1,7 @@
-'use strict';
+import md5 from '../common/md5';
+import User from '../models/user';
 
-const md5 = require('../common/md5');
-const User = require('../models/user');
-
-exports.login = function *(next) {
+export const login = function *(next) {
     if (this.session.user) {
         return this.redirect('/');
     }
@@ -14,7 +12,7 @@ exports.login = function *(next) {
 
     yield next;
 };
-exports.loginPost = function *(next) {
+export const loginPost = function *(next) {
     let self = this;
     let body = this.request.body;
     let email = body.email;

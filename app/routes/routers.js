@@ -1,12 +1,13 @@
-'use strict';
+import koaRouter from 'koa-router';
+import home from '../controllers/home';
+import page from '../controllers/page';
+import { category, article, tag, newArticle,
+    newArticlePost, editArticle, editArticlePost } from '../controllers/post';
+import { login, loginPost } from '../controllers/user';
 
-const router = require('koa-router')();
-const home = require('../controllers/home');
-const page = require('../controllers/page');
-const post = require('../controllers/post');
-const user = require('../controllers/user');
+const router = koaRouter();
 
-module.exports = function(app) {
+const routes = app => {
     app.use(router.routes());
 
     router.get('/', home);
@@ -14,15 +15,19 @@ module.exports = function(app) {
     router.get('/about', page.about);
     router.get('/sitemap.html', page.sitemap);
 
-    router.get('/:cat', post.category);
-    router.get('/:id'+'.html', post.article);
-    router.get('/tag/:tag', post.tag);
-    router.get('/new', post.new);
-    router.post('/new', post.newPost);
-    router.get('/:id/edit', post.editArticle);
-    router.post('/:id/edit', post.editArticlePost);
+    router.get('/:cat', category);
+    router.get('/:id'+'.html', article);
+    router.get('/tag/:tag', tag);
 
-    router.get('/login', user.login);
-    router.post('/login', user.loginPost);
+    router.get('/new', newArticle);
+    router.post('/new', newArticlePost);
+
+    router.get('/:id/edit', editArticle);
+    router.post('/:id/edit', editArticlePost);
+
+    router.get('/login', login);
+    router.post('/login', loginPost);
 };
+
+export default routes;
 

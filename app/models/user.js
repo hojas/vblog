@@ -1,8 +1,7 @@
-'use strict';
+import mongoose from 'mongoose';
+import md5 from '../common/md5';
 
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var md5 = require('../common/md5');
+const Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
     username: String,
@@ -39,5 +38,5 @@ UserSchema.static('findByMail', function(email) {
     });
 });
 
-module.exports = mongoose.model('User', UserSchema);
+export default mongoose.model('User', UserSchema);
 

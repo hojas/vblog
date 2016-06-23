@@ -1,13 +1,11 @@
-'use strict';
+import Post from '../models/post';
 
-const Post = require('../models/post');
-
-module.exports = function *(next) {
+export default function *(next) {
     let self = this;
 
     // TODO
     // 分页功能
-    yield Post.findByCat().then(function(posts) {
+    yield Post.findByCat().then(posts => {
         return self.render('home/index.html', {
             posts: posts,
             user: self.session.user,
@@ -15,5 +13,5 @@ module.exports = function *(next) {
     });
 
     yield next;
-};
+}
 

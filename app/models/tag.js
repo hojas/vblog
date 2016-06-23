@@ -1,7 +1,6 @@
-'use strict';
+import mongoose from 'mongoose';
 
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 var TagSchema =  new Schema({
     name: String,
@@ -48,5 +47,5 @@ TagSchema.static('findAll', function() {
     });
 });
 
-module.exports = mongoose.model('Tag', TagSchema);
+export default mongoose.model('Tag', TagSchema);
 

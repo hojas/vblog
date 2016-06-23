@@ -1,10 +1,8 @@
-'use strict';
+import Post from '../models/post';
+import Category from '../models/category';
+import Tag from '../models/tag';
 
-const Post = require('../models/post');
-const Category = require('../models/category');
-const Tag = require('../models/tag');
-
-exports.about = function *(next) {
+const about = function *(next) {
     let self = this;
 
     yield this.render('page/about.html', {
@@ -15,7 +13,8 @@ exports.about = function *(next) {
 
     yield next;
 };
-exports.sitemap = function *(next) {
+
+const sitemap = function *(next) {
     let self = this;
     let oPosts;
     let oTags;
@@ -24,13 +23,13 @@ exports.sitemap = function *(next) {
         url: '/about',
     }];
 
-    yield Post.findByCat().then(function(posts) {
+    yield Post.findByCat().then(posts => {
         oPosts = posts;
         return Tag.findAll();
-    }).then(function(tags) {
+    }).then(tags => {
         oTags = tags;
         return Category.findAll();
-    }).then(function(cats) {
+    }).then(cats => {
         return self.render('page/sitemap.html', {
             ptitle: '网站地图',
             posts: oPosts,
@@ -38,10 +37,12 @@ exports.sitemap = function *(next) {
             pages: pages,
             tags: oTags,
         });
-    }).catch(function() {
+    }).catch(() => {
         return next;
     });
 
     yield next;
 };
+
+export default { about, sitemap };
 

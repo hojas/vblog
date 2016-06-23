@@ -1,10 +1,9 @@
-'use strict';
+import mongoose from 'mongoose';
+import moment from 'moment';
+import marked from 'marked';
+import Category from './category';
 
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var moment = require('moment');
-var marked = require('marked');
-var Category = require('./category');
+const Schema = mongoose.Schema;
 
 var PostSchema = new Schema({
     id: Number,
@@ -124,5 +123,5 @@ PostSchema.static('postCounts', function() {
     });
 });
 
-module.exports = mongoose.model('Post', PostSchema);
+export default mongoose.model('Post', PostSchema);
 

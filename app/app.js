@@ -1,18 +1,16 @@
-'use strict';
-
-var koa = require('koa');
-var bodyParser = require('koa-bodyparser');
-var session = require('koa-session');
-var compress = require('koa-compress');
-var staticServer = require('koa-static');
-var mongoose = require('mongoose');
-var routes = require('./routes/routers');
+import koa from 'koa';
+import bodyParser from 'koa-bodyparser';
+import session from 'koa-session';
+import compress from 'koa-compress';
+import staticServer from 'koa-static';
+import mongoose from 'mongoose';
+import routes from './routes/routers';
 
 // local middlewares
-var nunjucks = require('../middlewares/koa-nunjucks/index');
+import nunjucks from './middlewares/nunjucks';
 
 // create app
-var app = koa();
+const app = koa();
 
 mongoose.connect('mongodb://localhost:27017/kblog');
 mongoose.connection.on('error', console.error.bind(console, '连接数据库失败'));
@@ -48,15 +46,13 @@ app.use(function *(next) {
 });
 
 app.use(compress({
-    filter: function(ct) {
-        return /text/i.test(ct);
-    },
+    filter: ct => /text/i.test(ct),
     threshold: 2048,
     flush: require('zlib').L_SYNC_FLUSH
 }));
 
 // for test
-//app.listen(8080);
+// app.listen(8080);
 
 // for production
 app.listen(8080, '127.0.0.1');

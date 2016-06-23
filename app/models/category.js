@@ -1,10 +1,9 @@
-'use strict';
+import mongoose from 'mongoose';
+import moment from 'moment';
 
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var moment = require('moment');
+const Schema = mongoose.Schema;
 
-var CategorySchema = new Schema({
+const CategorySchema = new Schema({
     url: String,
     name: String,
     index: Number,
@@ -38,5 +37,5 @@ CategorySchema.static('findAll', function() {
     });
 });
 
-module.exports = mongoose.model('Category', CategorySchema);
+export default mongoose.model('Category', CategorySchema);
 

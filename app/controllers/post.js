@@ -1,37 +1,36 @@
-'use strict';
-
-const Category = require('../models/category');
-const Post = require('../models/post');
-const Tag = require('../models/tag');
+import Category from '../models/category';
+import Post from '../models/post';
+import Tag from '../models/tag';
 
 // 分类下的文章
-exports.category = function *(next) {
+export const category = function *(next) {
     let self = this;
     let catUrl = this.params.cat;
     let ptitle;
 
-    yield Category.findByUrl(catUrl).then(function(cat) {
+    yield Category.findByUrl(catUrl).then(cat => {
         ptitle = cat.name;
         return Post.findByCat(cat);
-    }).then(function(posts) {
+    }).then(posts => {
         return self.render('post/index.html', {
             ptitle: ptitle,
             currentCat: catUrl,
             posts: posts,
             user: self.session.user,
         });
-    }).catch(function() {
+    }).catch(() => {
         return next;
     });
 
     yield next;
 };
+
 // 文章详情
-exports.article = function *(next) {
+export const article = function *(next) {
     let self = this;
     let id = this.params.id;
 
-    yield Post.findById(id).then(function(post) {
+    yield Post.findById(id).then(post => {
         return post.increaseViews();
     }).then(function(post) {
         return self.render('post/details.html', {
@@ -40,32 +39,33 @@ exports.article = function *(next) {
             post: post,
             user: self.session.user,
         });
-    }).catch(function() {
+    }).catch(() => {
         return next;
     });
 
     yield next;
 };
+
 // 标签下的文章
-exports.tag = function *(next) {
+export const tag = function *(next) {
     let self = this;
     let tag = this.params.tag;
 
-    yield Post.findByTag(tag).then(function(posts) {
+    yield Post.findByTag(tag).then(posts => {
         return self.render('post/tag.html', {
             ptitle: tag,
             tag: tag,
             posts: posts,
             user: self.session.user,
         });
-    }, function() {
+    }).catch(() => {
         return next;
     });
 
     yield next;
 };
 // 发表新文章
-exports.new = function *(next) {
+export const newArticle = function *(next) {
     if (! this.session.user) {
         return next;
     }
@@ -84,7 +84,7 @@ exports.new = function *(next) {
 
     yield next;
 };
-exports.newPost = function *(next) {
+export const newArticlePost = function *(next) {
     if (! this.session.user) {
         return next;
     }
@@ -116,7 +116,7 @@ exports.newPost = function *(next) {
 
     yield next;
 };
-exports.editArticle = function *(next) {
+export const editArticle = function *(next) {
     if (! this.session.user) {
         return next;
     }
@@ -141,7 +141,7 @@ exports.editArticle = function *(next) {
 
     yield next;
 };
-exports.editArticlePost = function *(next) {
+export const editArticlePost = function *(next) {
     if (! this.session.user) {
         return next;
     }
