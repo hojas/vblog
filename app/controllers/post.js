@@ -36,6 +36,7 @@ export const article = function *(next) {
         return self.render('post/details.html', {
             ptitle: post.title,
             currentCat: post.category.url,
+            currentCateName: post.category.name,
             post: post,
             user: self.session.user,
         });

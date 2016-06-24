@@ -1,9 +1,14 @@
 import mongoose from 'mongoose';
 import moment from 'moment';
 import marked from 'marked';
+import hljs from 'highlight.js';
 import Category from './category';
 
 const Schema = mongoose.Schema;
+
+marked.setOptions({
+    highlight: code => hljs.highlightAuto(code).value,
+});
 
 var PostSchema = new Schema({
     id: Number,

@@ -5,9 +5,8 @@ var webpack = require('webpack');
 
 module.exports = {
     devtool: '#source-map',
-    watch: true,
+    watch: false,
     entry: {
-        details: './app/public/js/post/details.js',
         new: './app/public/js/post/new.js',
     },
     output: {

@@ -4,7 +4,7 @@
   "description": "A blog build with koa.",
   "main": "app.js",
   "scripts": {
-    "start": "babel-node --debug app/app.js",
+    "start": "babel-node app/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

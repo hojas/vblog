@@ -4,7 +4,7 @@ import session from 'koa-session';
 import compress from 'koa-compress';
 import staticServer from 'koa-static';
 import mongoose from 'mongoose';
-import routes from './routes/routers';
+import routes from './routes';
 
 // local middlewares
 import nunjucks from './middlewares/nunjucks';

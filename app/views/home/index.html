@@ -2,10 +2,15 @@
 {% from '../modules/post-item.html' import postItem %}
 
 {% block body %}
-    {{ postItem(posts) }}
-    <div class="links">
-        <h4>友情链接：</h4>
-        <a href="http://www.w3ccafe.com/" target="_blank">前端咖啡屋</a>
+    <div class="panel panel-default">
+        <div class="panel-heading">最新文章</div>
+        {{ postItem(posts) }}
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">友情链接</div>
+        <div class="panel-body">
+            <a href="http://www.w3ccafe.com/" target="_blank">前端咖啡屋</a>
+        </div>
     </div>
 {% endblock %}
 
