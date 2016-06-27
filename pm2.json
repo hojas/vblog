@@ -2,9 +2,7 @@
     "apps": [{
         "name"            : "kblog",
         "script"          : "app/app.js",
-        "exec_mode"       : "fork_mode",
-        "instances"       : 0,
-        "exec_interpreter": "babel-node",
+        "interpreter"     : "node_modules/.bin/babel-node",
         "error_file"      : "logs/err.log",
         "out_file"        : "logs/out.log",
         "merge_logs"      : true,
