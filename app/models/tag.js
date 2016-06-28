@@ -7,10 +7,8 @@ var TagSchema =  new Schema({
 });
 
 TagSchema.methods.add = function() {
-    let self = this;
-
-    return new Promise(function(resolve, reject) {
-        self.save(function(err, data) {
+    return new Promise((resolve, reject) => {
+        this.save((err, data) => {
             if (err) {
                 reject(err);
             } else {
@@ -21,10 +19,8 @@ TagSchema.methods.add = function() {
 };
 
 TagSchema.static('isExisted', function(name) {
-    let self = this;
-
-    return new Promise(function(resolve, reject) {
-        self.findOne({ name: name }, function(err, tag) {
+    return new Promise((resolve, reject) => {
+        this.findOne({ name: name }, (err, tag) => {
             if (err) {
                 reject(err);
             } else {
@@ -34,10 +30,8 @@ TagSchema.static('isExisted', function(name) {
     });
 });
 TagSchema.static('findAll', function() {
-    let self = this;
-
-    return new Promise(function(resolve, reject) {
-        self.find({}, function(err, user) {
+    return new Promise((resolve, reject) => {
+        this.find({}, (err, user) => {
             if (err) {
                 reject(err);
             } else {

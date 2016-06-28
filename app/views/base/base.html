@@ -11,8 +11,10 @@
     {% endif %}
     <meta name="description" content="前端日志网专注于前端开发和Node.js开发，是一个致力于分享JavaScript开发技术、CSS开发技术等前端开发技术和Node.js开发技术的网站。">
     <meta name="keywords" content="前端开发,JavaScript,CSS,Node.js,rust">
+    <link rel="icon" sizes="32x32" type="image/png" href="/favicon.png">
     <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/highlight.js/9.4.0/styles/monokai_sublime.min.css" rel="stylesheet">
     <link href="/css/dest/app.css" rel="stylesheet">
     {% block css %}
     {% endblock %}
@@ -32,8 +34,11 @@
     {% endblock %}
     </div>
     {% include './footer.html' %}
-    {% block js %}
+    <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="//cdn.bootcss.com/highlight.js/9.4.0/highlight.min.js"></script>
+    <script src="/js/dest/app.js"></script>
+    {% block js %}
     {% endblock %}
 </body>
 </html>

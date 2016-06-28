@@ -6,10 +6,6 @@ import Category from './category';
 
 const Schema = mongoose.Schema;
 
-marked.setOptions({
-    highlight: code => hljs.highlightAuto(code).value,
-});
-
 var PostSchema = new Schema({
     id: Number,
     title: String,
@@ -30,25 +26,22 @@ PostSchema.virtual('markedContent').get(function() {
 });
 
 PostSchema.methods.increaseViews = function() {
-    let self = this;
     let query = { _id: this._id };
     let update = { $set: { views: this.views + 1 } };
 
-    return new Promise(function(resolve, reject) {
-        self.constructor.update(query, update, function(err, data) {
+    return new Promise((resolve, reject) => {
+        this.constructor.update(query, update, (err, data) => {
             if (err) {
                 reject(err);
             } else {
-                resolve(self);
+                resolve(this);
             }
         });
     });
 };
 PostSchema.methods.add = function() {
-    let self = this;
-
-    return new Promise(function(resolve, reject) {
-        self.save(function(err, data) {
+    return new Promise((resolve, reject) => {
+        this.save((err, data) => {
             if (err) {
                 reject(err);
             } else {
@@ -58,28 +51,26 @@ PostSchema.methods.add = function() {
     });
 };
 PostSchema.methods.update = function(post) {
-    let self = this;
     let q = { _id: this._id };
 
-    return new Promise(function(resolve, reject) {
-        self.constructor.update(q, post, function(err, data) {
+    return new Promise((resolve, reject) => {
+        this.constructor.update(q, post, (err, data) => {
             if (err) {
                 reject(err);
             } else {
-                resolve(self);
+                resolve(this);
             }
         });
     });
 };
 
 PostSchema.static('findByCat', function(cat) {
-    let self = this;
     let current_cat = cat ? { category: { name: cat.name, url: cat.url }} : {};
 
-    return new Promise(function(resolve, reject) {
-        self.find(current_cat)
+    return new Promise((resolve, reject) => {
+        this.find(current_cat)
         .sort({ createdAt: -1 })
-        .exec(function(err, posts) {
+        .exec((err, posts) => {
             if (err) {
                 reject(err);
             } else {
@@ -89,10 +80,8 @@ PostSchema.static('findByCat', function(cat) {
     });
 });
 PostSchema.static('findById', function(id) {
-    let self = this;
-
-    return new Promise(function(resolve, reject) {
-        self.findOne({ id: id }, function(err, post) {
+    return new Promise((resolve, reject) => {
+        this.findOne({ id: id }, (err, post) => {
             if (err || !post) {
                 reject(err);
             } else {
@@ -102,10 +91,8 @@ PostSchema.static('findById', function(id) {
     });
 });
 PostSchema.static('findByTag', function(tag) {
-    let self = this;
-
-    return new Promise(function(resolve, reject) {
-        self.find({ tags: { $in: [tag] } }, function(err, posts) {
+    return new Promise((resolve, reject) => {
+        this.find({ tags: { $in: [tag] } }, (err, posts) => {
             if (err || !posts.length) {
                 reject(err);
             } else {
@@ -115,10 +102,8 @@ PostSchema.static('findByTag', function(tag) {
     });
 });
 PostSchema.static('postCounts', function() {
-    let self = this;
-
-    return new Promise(function(resolve, reject) {
-        self.count({}, function(err, count) {
+    return new Promise((resolve, reject) => {
+        this.count({}, (err, count) => {
             if (err) {
                 reject(err);
             } else {

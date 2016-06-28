@@ -10,11 +10,10 @@ var UserSchema = new Schema({
 });
 
 UserSchema.methods.add = function() {
-    let self = this;
     this.password = md5(this.password);
 
-    return new Promise(function(resolve, reject) {
-        self.save(function(err, data) {
+    return new Promise((resolve, reject) => {
+        this.save((err, data) => {
             if (err) {
                 reject(err);
             } else {
@@ -25,10 +24,8 @@ UserSchema.methods.add = function() {
 };
 
 UserSchema.static('findByMail', function(email) {
-    let self = this;
-
-    return new Promise(function(resolve, reject) {
-        self.findOne({ email: email }, function(err, user) {
+    return new Promise((resolve, reject) => {
+        this.findOne({ email: email }, (err, user) => {
             if (err) {
                 reject(err);
             } else {

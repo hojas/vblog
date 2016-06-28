@@ -1,8 +1,8 @@
 {% extends 'base/base.html' %}
 
 {% block body %}
-<div class="row post-new">
-    <div class="col-md-12" id="post-toolbar">
+<div class="row">
+    <div class="col-md-12">
         <form class="form-inline">
             <div class="form-group">
                 <label>分类：</label>
@@ -17,18 +17,14 @@
                 <label>标签：</label>
                 <input class="form-control" type="text" name="tags" value="{{ post.tags or '' }}">
             </div>
-            <button class="btn btn-default addpost">发布</button>
+            <button class="btn btn-primary addpost">发布</button>
         </form>
     </div>
-    <input type="text" class="form-control" name="title" placeholder="文章标题" value="{{ post.title or '' }}">
-    <div class="col-md-12" id="post-editor"></div>
+    <div class="col-md-12 post-editor">
+        <input type="text" class="form-control" name="title" placeholder="文章标题" value="{{ post.title or '' }}">
+        <br>
+        <textarea class="form-control">{{ post.content or '' }}</textarea>
+    </div>
 </div>
-{% if post %}
-<textarea class="post-origin" cols="0" rows="0">{{ post.content }}</textarea>
-{% endif %}
-{% endblock %}
-
-{% block js %}
-<script src="/js/dest/new.js"></script>
 {% endblock %}
 

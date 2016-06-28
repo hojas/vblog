@@ -17,16 +17,14 @@ module.exports = function(path, opts) {
     });
 
     return function *(next) {
-        var self = this;
-
-        this.render = function(view, ctx) {
-            return new Promise(function(resolve, reject) {
-                nunjucks.render(view, ctx, function(err, res) {
+        this.render = (view, ctx) => {
+            return new Promise((resolve, reject) => {
+                nunjucks.render(view, ctx, (err, res) => {
                     if (err) {
                         return reject(err);
                     }
 
-                    self.body = res;
+                    this.body = res;
                     resolve();
                 });
             });

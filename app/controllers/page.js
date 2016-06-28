@@ -3,19 +3,16 @@ import Category from '../models/category';
 import Tag from '../models/tag';
 
 const about = function *(next) {
-    let self = this;
-
     yield this.render('page/about.html', {
         ptitle: '关于',
         currentCat: 'about',
-        user: self.session.user,
+        user: this.session.user,
     });
 
     yield next;
 };
 
 const sitemap = function *(next) {
-    let self = this;
     let oPosts;
     let oTags;
     let pages = [{
@@ -30,7 +27,7 @@ const sitemap = function *(next) {
         oTags = tags;
         return Category.findAll();
     }).then(cats => {
-        return self.render('page/sitemap.html', {
+        return this.render('page/sitemap.html', {
             ptitle: '网站地图',
             posts: oPosts,
             cats: cats,
@@ -44,5 +41,8 @@ const sitemap = function *(next) {
     yield next;
 };
 
-export default { about, sitemap };
+export default {
+    about,
+    sitemap,
+};
 

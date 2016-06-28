@@ -4,6 +4,7 @@
         <span><i class="fa fa-clock-o"></i> {{ post.pretty_createdAt }}</span>
         <span><i class="fa fa-eye"></i> {{ post.views }}</span>
         <span>
+            <i class="fa fa-tags"></i>
             {% for t in post.tags %}
             <a class="label label-info" href="/tag/{{ t }}">{{ t }}</a>
             {% endfor %}

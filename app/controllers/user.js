@@ -1,37 +1,41 @@
 import md5 from '../common/md5';
 import User from '../models/user';
 
-export const login = function *(next) {
+const loginGet = function *(next) {
     if (this.session.user) {
         return this.redirect('/');
     }
 
     yield this.render('user/login.html', {
-        ptitle: '登录'
+        ptitle: '登录',
     });
 
     yield next;
 };
-export const loginPost = function *(next) {
-    let self = this;
+const loginPost = function *(next) {
     let body = this.request.body;
     let email = body.email;
     let password = body.password;
 
-    yield User.findByMail(email).then(function(user) {
+    yield User.findByMail(email).then(user => {
         if (user.password === md5(password)) {
             user.password = null;
             delete user.password;
-            self.session.user = user;
+            this.session.user = user;
 
-            return self.redirect('/');
+            return this.redirect('/');
         } else {
-            return self.redirect('/login');
+            return this.redirect('/login');
         }
-    }, function() {
+    }).catch(() => {
         return next;
     });
 
     yield next;
+}
+
+export default {
+    loginGet,
+    loginPost,
 }
 

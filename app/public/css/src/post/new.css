@@ -1,19 +1,8 @@
-.post-new {
-    position: relative;
-    height: 1000px;
-    margin-bottom: 30px;
-}
-#post-toolbar {
-    height: 50px;
-}
-#post-editor {
-    position: absolute;
-    top: 100px;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    margin: 0 auto;
-    font-size: 16px;
-}
+.post-editor {
+    margin-top: 10px;
 
+    textarea {
+        height: 500px;
+        resize: vertical;
+    }
+}
