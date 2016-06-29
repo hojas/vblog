@@ -9,6 +9,15 @@
         .navbar-brand {
            color: #fff;
         }
+        .navbar-toggle {
+            &:focus,
+            &:hover {
+                background-color: transparent;
+            }
+            .icon-bar {
+                background-color: #ddd;
+            }
+        }
     }
     .navbar-nav {
         li {
@@ -32,3 +41,4 @@
         }
     }
 }
+

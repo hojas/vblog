@@ -41,8 +41,17 @@ const sitemap = function *(next) {
     yield next;
 };
 
+const nav = function *(next) {
+    yield this.render('page/nav.html', {
+        ptitle: '搜索',
+    });
+
+    yield next;
+}
+
 export default {
     about,
     sitemap,
+    nav,
 };
 

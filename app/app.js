@@ -1,3 +1,4 @@
+import zlib from 'zlib';
 import koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import session from 'koa-session';
@@ -48,7 +49,7 @@ app.use(function *(next) {
 app.use(compress({
     filter: ct => /text/i.test(ct),
     threshold: 2048,
-    flush: require('zlib').L_SYNC_FLUSH
+    flush: zlib.L_SYNC_FLUSH
 }));
 
 // for test

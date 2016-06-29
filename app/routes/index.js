@@ -13,6 +13,7 @@ const routes = app => {
 
     router.get('/about', page.about);
     router.get('/sitemap.html', page.sitemap);
+    router.get('/nav.html', page.nav);
 
     router.get('/:cate', post.category);
     router.get('/:id'+'.html', post.article);
