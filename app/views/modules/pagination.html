@@ -1,0 +1,42 @@
+{% macro render_pagination(pagination, endpoint) %}
+{% if pagination.pages > 1 %}
+    <ul class="pagination">
+        {% if pagination.page == 1 %}
+        <li class="disabled">
+            <a aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        {% else %}
+        <li>
+            <a href="{{ endpoint }}/page/{{ pagination.page - 1 }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        {% endif %}
+        {% for page in range(1, pagination.pages + 1) %}
+        <li {% if page == pagination.page %}class="active"{% endif %}>
+            {% if page == 1 %}
+            <a href="{{ endpoint or '/' }}">{{ page }}</a>
+            {% else %}
+            <a href="{{ endpoint }}/page/{{ page }}">{{ page }}</a>
+            {% endif %}
+        </li>
+        {% endfor %}
+        {% if pagination.page == pagination.pages %}
+        <li class="disabled">
+            <a aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+        {% else %}
+        <li>
+            <a href="{{ endpoint }}/page/{{ pagination.page + 1 }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+        {% endif %}
+    </ul>
+{% endif %}
+{% endmacro %}
+

@@ -1,10 +1,12 @@
 import mongoose from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate';
 import moment from 'moment';
 import marked from 'marked';
 import hljs from 'highlight.js';
 import Category from './category';
 
 const Schema = mongoose.Schema;
+const pageSize = 15;
 
 var PostSchema = new Schema({
     id: Number,
@@ -16,6 +18,8 @@ var PostSchema = new Schema({
     views: { type: Number, default: 0 },
     createdAt: { type: Date, default: Date.now },
 });
+
+PostSchema.plugin(mongoosePaginate);
 
 PostSchema.virtual('pretty_createdAt').get(function() {
     moment.locale('zh-cn');
@@ -64,18 +68,20 @@ PostSchema.methods.update = function(post) {
     });
 };
 
-PostSchema.static('findByCat', function(cat) {
-    let current_cat = cat ? { category: { name: cat.name, url: cat.url }} : {};
+PostSchema.static('findByCate', function(cate, page = 1) {
+    let current_cate = cate ? { category: { name: cate.name, url: cate.url }} : {};
 
     return new Promise((resolve, reject) => {
-        this.find(current_cat)
-        .sort({ createdAt: -1 })
-        .exec((err, posts) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(posts);
-            }
+        this.paginate(current_cate, {
+            page: page,
+            limit: pageSize,
+            sort: { createdAt: -1 },
+        })
+        .then(res => {
+            resolve(res);
+        })
+        .catch(err => {
+            reject(err);
         });
     });
 });
@@ -90,14 +96,18 @@ PostSchema.static('findById', function(id) {
         });
     });
 });
-PostSchema.static('findByTag', function(tag) {
+PostSchema.static('findByTag', function(tag, page = 1) {
     return new Promise((resolve, reject) => {
-        this.find({ tags: { $in: [tag] } }, (err, posts) => {
-            if (err || !posts.length) {
-                reject(err);
-            } else {
-                resolve(posts);
-            }
+        this.paginate({ tags: { $in: [tag] } }, {
+            page: page,
+            limit: pageSize,
+            sort: { createAt: -1 },
+        })
+        .then(res => {
+            resolve(res);
+        })
+        .catch(err => {
+            reject(err);
         });
     });
 });

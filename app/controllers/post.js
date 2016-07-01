@@ -5,16 +5,17 @@ import Tag from '../models/tag';
 // 分类下的文章
 const category = function *(next) {
     let cateUrl = this.params.cate;
+    let page = this.params.page;
     let ptitle;
 
     yield Category.findByUrl(cateUrl).then(cate => {
         ptitle = cate.name;
-        return Post.findByCat(cate);
-    }).then(posts => {
+        return Post.findByCate(cate, page);
+    }).then(res => {
         return this.render('post/index.html', {
             ptitle: ptitle,
-            currentCat: cateUrl,
-            posts: posts,
+            currentCate: cateUrl,
+            pagination: res,
             user: this.session.user,
         });
     }).catch(() => {
@@ -33,7 +34,7 @@ const article = function *(next) {
     }).then(post => {
         return this.render('post/details.html', {
             ptitle: post.title,
-            currentCat: post.category.url,
+            currentCate: post.category.url,
             currentCateName: post.category.name,
             post: post,
             user: this.session.user,
@@ -48,12 +49,13 @@ const article = function *(next) {
 // 标签下的文章
 const tag = function *(next) {
     let tag = this.params.tag;
+    let page = this.params.page;
 
-    yield Post.findByTag(tag).then(posts => {
+    yield Post.findByTag(tag, page).then(res => {
         return this.render('post/tag.html', {
             ptitle: tag,
             tag: tag,
-            posts: posts,
+            pagination: res,
             user: this.session.user,
         });
     }).catch(() => {
@@ -72,7 +74,7 @@ const newArticleGet = function *(next) {
     yield Category.findAll().then(cates => {
         return this.render('post/new.html', {
             ptitle: '写文章',
-            cats: cates,
+            cates: cates,
             user: this.session.user,
         });
     }).catch(() => {
@@ -126,7 +128,7 @@ const editArticleGet = function *(next) {
     }).then(cates => {
         return this.render('post/new.html', {
             ptitle: oPost.title,
-            cats: cates,
+            cates: cates,
             post: oPost,
             user: this.session.user,
         });

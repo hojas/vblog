@@ -5,7 +5,7 @@ import Tag from '../models/tag';
 const about = function *(next) {
     yield this.render('page/about.html', {
         ptitle: '关于',
-        currentCat: 'about',
+        currentCate: 'about',
         user: this.session.user,
     });
 
@@ -20,17 +20,17 @@ const sitemap = function *(next) {
         url: '/about',
     }];
 
-    yield Post.findByCat().then(posts => {
-        oPosts = posts;
+    yield Post.findByCate().then(res => {
+        oPosts = res.docs;
         return Tag.findAll();
     }).then(tags => {
         oTags = tags;
         return Category.findAll();
-    }).then(cats => {
+    }).then(cates => {
         return this.render('page/sitemap.html', {
             ptitle: '网站地图',
             posts: oPosts,
-            cats: cats,
+            cates: cates,
             pages: pages,
             tags: oTags,
         });

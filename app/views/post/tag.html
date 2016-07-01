@@ -1,5 +1,6 @@
 {% extends 'base/base.html' %}
 {% from '../modules/post-item.html' import postItem %}
+{% from '../modules/pagination.html' import render_pagination %}
 
 {% block body %}
     <ol class="breadcrumb">
@@ -8,7 +9,8 @@
     </ol>
     <div class="panel panel-default">
         <div class="panel-heading">“{{ tag }}”标签下的文章</div>
-        {{ postItem(posts) }}
+        {{ postItem(pagination.docs) }}
     </div>
+    {{ render_pagination(pagination, '/' + tag) }}
 {% endblock %}
 

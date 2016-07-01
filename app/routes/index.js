@@ -10,6 +10,7 @@ const routes = app => {
     app.use(router.routes());
 
     router.get('/', home);
+    router.get('/page/:page', home);
 
     router.get('/about', page.about);
     router.get('/sitemap.html', page.sitemap);

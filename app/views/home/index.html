@@ -1,28 +1,30 @@
 {% extends 'base/base.html' %}
 {% from '../modules/post-item.html' import postItem %}
+{% from '../modules/pagination.html' import render_pagination %}
 
 {% block content %}
     <div class="panel panel-default">
         <div class="panel-heading">最新文章</div>
-        {{ postItem(posts) }}
+        {{ postItem(pagination.docs) }}
     </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">友情链接</div>
-        <div class="panel-body">
-            <a href="http://www.w3ccafe.com/" target="_blank">前端咖啡屋</a>
-        </div>
-    </div>
+    {{ render_pagination(pagination, '') }}
 {% endblock %}
 
 {% block side %}
-<form>
-<div class="input-group">
-    <input type="text" class="form-control" id="bdcsMain">
-    <span class="input-group-btn">
-        <button class="btn btn-default" type="submit">搜索</button>
-    </span>
-</div>
+<form class="sidebox">
+    <div class="input-group">
+        <input type="text" class="form-control" id="bdcsMain">
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">搜索</button>
+        </span>
+    </div>
 </form>
+<div class="panel panel-default sidebox">
+    <div class="panel-heading">友情链接</div>
+    <div class="panel-body">
+        <a href="http://www.w3ccafe.com/" target="_blank">前端咖啡屋</a>
+    </div>
+</div>
 {% endblock %}
 
 {% block js %}

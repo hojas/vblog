@@ -1,11 +1,11 @@
 import Post from '../models/post';
 
 export default function *(next) {
-    // TODO
-    // 分页功能
-    yield Post.findByCat().then(posts => {
+    let page = this.params.page;
+
+    yield Post.findByCate(null, page).then(res => {
         return this.render('home/index.html', {
-            posts: posts,
+            pagination: res,
             user: this.session.user,
         });
     });

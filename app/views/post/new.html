@@ -7,7 +7,7 @@
             <div class="form-group">
                 <label>分类：</label>
                 <select class="form-control" name="category">
-                    {% for c in cats %}
+                    {% for c in cates %}
                     <option {% if post.category and post.category.url == c.url %}selected{% endif %}
                         value="{{ c.name + ',' + c.url }}">{{ c.name }}</option>
                     {% endfor %}

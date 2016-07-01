@@ -23,11 +23,11 @@ CategorySchema.static('findByUrl', function(url) {
 
 CategorySchema.static('findAll', function() {
     return new Promise((resolve, reject) => {
-        this.find({}, (err, cats) => {
+        this.find({}, (err, cates) => {
             if (err) {
                 reject(err);
             } else {
-                resolve(cats);
+                resolve(cates);
             }
         });
     });
