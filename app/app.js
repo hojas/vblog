@@ -13,6 +13,7 @@ import nunjucks from './middlewares/nunjucks';
 // create app
 const app = koa();
 
+mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/kblog');
 mongoose.connection.on('error', console.error.bind(console, '连接数据库失败'));
 
