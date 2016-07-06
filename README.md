@@ -3,6 +3,11 @@
 
 A simple blog build with Koa. Markdown and syntax highlight supported.
 
+## Requirements
+
+1. Node.js (4.4.x or 6.2.x)
+2. Mongodb
+
 ## Deploy:
 
 1. Clone project: `git clone https://github.com/hojas/kblog.git`
