@@ -1,29 +1,29 @@
 
 # kblog
 
-A simple blog build with Koajs.
+A simple blog build with Koa. Markdown and syntax highlight supported.
 
-Deploy:
+## Deploy:
 
-Should install `nginx` first. If not, have to listen port 80 in `app.js`, and run pm2 by root user. Then copy `nginx.conf` to `/etc/nginx/conf.d`, and include `nginx.conf` file in `/etc/nginx/nginx.conf`:
+1. Clone project: `git clone https://github.com/hojas/kblog.git`
 
-Open `/etc/nginx/nginx.conf`, and fix
+2. Install npm packages: `npm install` (under dir `kblog/`)
 
-```
-    include /etc/nginx/conf.d/*.conf;
-```
+3. Install gulp: `sudo npm install -g gulp`
 
-to
+4. Build JavaScript and css: `gulp` (under dir `kblog/`)
 
-```
-    include /etc/nginx/conf.d/nginx.conf;
-```
+5. Install pm2: `sudo npm install -g pm2`
 
-Run pm2:
+6. Run app with pm2: `pm2 start pm2.json` (under dir `kblog/`)
 
-```
-$ pm2 start pm2.json
-```
+7. Check app running: `pm2 list`
+
+8. Install nginx
+
+9. Copy `kblog/nginx.conf` to `/etc/nginx/conf.d/`
+
+10. Restart nginx: `sudo service nginx restart`
 
 TODO:
 
