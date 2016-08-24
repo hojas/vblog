@@ -20,7 +20,7 @@ const sitemap = function *(next) {
         url: '/about',
     }];
 
-    yield Post.findByCate().then(res => {
+    yield Post.findByCate(null, 0).then(res => {
         oPosts = res.docs;
         return Tag.findAll();
     }).then(tags => {

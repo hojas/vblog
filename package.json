@@ -5,6 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start": "babel-node app/app.js",
+    "build": "gulp",
+    "buildjs": "gulp webpack",
+    "buildcss": "gulp css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

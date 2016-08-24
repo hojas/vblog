@@ -72,9 +72,15 @@ PostSchema.static('findByCate', function(cate, page = 1) {
     let current_cate = cate ? { category: { name: cate.name, url: cate.url }} : {};
 
     return new Promise((resolve, reject) => {
+        let pSize = 0;
+        if (page === 0) {
+            page = 1;
+            pSize = 1000;
+        }
+
         this.paginate(current_cate, {
             page: page,
-            limit: pageSize,
+            limit: pSize || pageSize,
             sort: { createdAt: -1 },
         })
         .then(res => {
