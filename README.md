@@ -5,8 +5,9 @@ A simple blog build with Koa. Markdown and syntax highlight supported.
 
 ## Requirements
 
-1. Node.js (4.4.x or 6.2.x)
+1. Node.js (4.x or 6.x)
 2. Mongodb
+3. Nginx
 
 ## Deploy:
 
