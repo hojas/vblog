@@ -14,8 +14,10 @@
                 <li {% if not currentCate %}class="active"{% endif %}><a href="/">首页</a></li>
                 <li {% if currentCate == 'frontend' %}class="active"{% endif %}><a href="/frontend">前端</a></li>
                 <li {% if currentCate == 'nodejs' %}class="active"{% endif %}><a href="/nodejs">Node.js</a></li>
+                <!--
                 <li {% if currentCate == 'algorithm' %}class="active"{% endif %}><a href="/algorithm">算法</a></li>
                 <li {% if currentCate == 'rust' %}class="active"{% endif %}><a href="/rust">Rust</a></li>
+                -->
                 <li {% if currentCate == 'about' %}class="active"{% endif %}><a href="/about">关于</a></li>
             </ul>
             {% if user %}

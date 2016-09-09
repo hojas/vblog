@@ -1,0 +1,4 @@
+/*Æ®Âä¶¯»­*/
+#leafContainer { z-index:999;width:100%;height:0;top:0;overflow:hidden}
+#leafContainer > div { position: absolute;max-width:100px;max-height: 100px;-webkit-animation-iteration-count: infinite, infinite; -webkit-animation-direction: normal, normal;-webkit-animation-timing-function: linear, ease-in;z-index:999;}
+#leafContainer>div>img{position:absolute;-webkit-animation-iteration-count:infinite;-webkit-animation-direction:alternate;-webkit-animation-timing-function:ease-in-out;-webkit-transform-origin:50% -100%}@-webkit-keyframes fade{0%{opacity:1}95%{opacity:1}100%{opacity:0}}@-webkit-keyframes drop{0%{-webkit-transform:translate(0px,-50px)}100%{-webkit-transform:translate(0px,650px)}}@-webkit-keyframes clockwiseSpin{0%{-webkit-transform:rotate(-50deg)}100%{-webkit-transform:rotate(50deg)}}@-webkit-keyframes counterclockwiseSpinAndFlip{0%{-webkit-transform:scale(-1,1) rotate(50deg)}100%{-webkit-transform:scale(-1,1) rotate(-50deg)}}
