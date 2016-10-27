@@ -1,6 +1,8 @@
 
 # kblog
 
+React version is here [rblog](https://github.com/hojas/rblog)
+
 A simple blog build with Koa. Markdown and syntax highlight supported.
 
 ## Requirements
