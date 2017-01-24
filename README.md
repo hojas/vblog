@@ -1,7 +1,7 @@
 
 # kblog
 
-New version using Koa2 is here [blog](https://github.com/hojas/blog)
+> New version using Koa2 is here [blog](https://github.com/hojas/blog)
 
 A simple blog build with Koa. Markdown and syntax highlight supported.
 
