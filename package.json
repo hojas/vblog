@@ -1,58 +1,48 @@
 {
-  "name": "kblog",
-  "version": "1.0.0",
-  "description": "A blog build with koa.",
-  "main": "app.js",
+  "name": "blog",
+  "version": "0.0.1",
+  "description": "My blog build with Koa2.",
+  "main": "index.js",
   "scripts": {
-    "start": "babel-node app/app.js",
-    "build": "gulp",
-    "buildjs": "gulp webpack",
-    "buildcss": "gulp css",
+    "build": "babel src -d dist",
+    "start": "nodemon --watch dist ./dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hojas/kblog.git"
+    "url": "git+https://github.com/hojas/blog.git"
   },
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "koa"
+  ],
+  "author": "hojas",
+  "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/hojas/kblog/issues"
+    "url": "https://github.com/hojas/blog/issues"
   },
-  "homepage": "https://github.com/hojas/kblog#readme",
+  "homepage": "https://github.com/hojas/blog#readme",
   "dependencies": {
-    "bootstrap": "^3.3.6",
-    "brace": "^0.5.1",
-    "highlight.js": "^8.9.1",
-    "jquery": "^2.2.0",
-    "koa": "^1.1.2",
-    "koa-bodyparser": "^2.0.1",
-    "koa-compress": "^1.0.9",
-    "koa-router": "^5.2.3",
-    "koa-session": "^3.3.1",
-    "koa-static": "^1.5.2",
-    "marked": "^0.3.5",
-    "moment": "^2.10.6",
-    "mongoose": "^4.2.5",
-    "mongoose-paginate": "^5.0.0",
-    "nunjucks": "^2.1.0"
+    "babel-polyfill": "^6.22.0",
+    "highlight.js": "^9.9.0",
+    "koa": "^2.0.0-alpha.7",
+    "koa-bodyparser": "^3.2.0",
+    "koa-convert": "^1.2.0",
+    "koa-nunjucks-next": "^1.1.2",
+    "koa-router": "^7.0.1",
+    "koa-send": "^3.3.0",
+    "koa-session": "^3.4.0",
+    "koa-slash": "^0.2.0",
+    "marked": "^0.3.6",
+    "moment": "^2.17.1",
+    "mongoose": "^4.7.7"
   },
   "devDependencies": {
-    "autoprefixer": "^6.2.3",
-    "babel-cli": "^6.10.1",
-    "babel-core": "^6.10.4",
-    "babel-loader": "^6.2.4",
-    "babel-preset-es2015": "^6.9.0",
-    "babel-preset-stage-0": "^6.5.0",
-    "cssnano": "^3.4.0",
-    "cssnext": "^1.8.4",
-    "gulp": "^3.9.0",
-    "gulp-postcss": "^6.0.1",
-    "gulp-util": "^3.0.7",
-    "postcss-import": "^7.1.3",
-    "postcss-inline-comment": "^2.0.0",
-    "postcss-modules": "^0.1.3",
-    "precss": "^1.4.0",
-    "webpack": "^1.12.6"
+    "babel-cli": "^6.22.2",
+    "babel-core": "^6.21.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-latest": "^6.16.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "nodemon": "^1.11.0",
+    "webpack": "^2.2.0"
   }
 }

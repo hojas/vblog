@@ -1,0 +1,7 @@
+{% extends "base/base.html" %}
+{% from "components/list.html" import render_list %}
+
+{% block body %}
+    {{ render_list(posts) }}
+{% endblock %}
+

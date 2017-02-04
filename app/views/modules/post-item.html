@@ -1,8 +1,0 @@
-{% macro postItem(posts) %}
-    <div class="list-group">
-        {% for p in posts %}
-        <a href="/{{ p.id }}.html" class="list-group-item">{{ p.title }}</a>
-        {% endfor %}
-    </div>
-{% endmacro %}
-

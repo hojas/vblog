@@ -1,34 +1,42 @@
-'use strict';
+const { resolve } = require('path');
+const webpack = require('webpack');
 
-var path = require('path');
-var webpack = require('webpack');
+module.exports = env => {
+    const addPlugin = (add, plugin) => add ? plugin : undefined;
+    const ifProd = plugin => addPlugin(env.prod, plugin);
+    const removeEmpty = arr => arr.filter(i => !!i);
 
-module.exports = {
-    devtool: '#source-map',
-    watch: false,
-    entry: {
-        app: './app/public/js/app.js',
-    },
-    output: {
-        path: path.join(__dirname, 'app/public/js/dest'),
-        filename: '[name].js',
-    },
-    module: {
-        loaders: [{
-            test: /\.js$/,
-            loaders: ['babel'],
-            include: path.join(__dirname, 'app/public/js')
-        }]
-    },
-    externals: {
-        jquery: 'jQuery',
-        bootstrap: 'bootstrap',
-        hljs: 'hljs',
-    },
-    plugins: [
-        new webpack.optimize.UglifyJsPlugin(),
-        new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 15 })
-    ],
+    return {
+        entry: {
+            app: './src/app.js',
+        },
+        output: {
+            path: resolve(__dirname, 'dist'),
+            filename: '[name].js',
+            pathinfo: !env.prod,
+        },
+        devtool: env.prod ? 'source-map' : 'eval',
+        module: {
+            rules: [
+                {
+                    test: /\.js$/,
+                    loader: 'babel-loader',
+                    exclude: /node_modules/,
+                },
+            ],
+        },
+        plugins: removeEmpty([
+             ifProd(new webpack.optimize.UglifyJsPlugin({
+                 compress:{
+                     warnings: true
+                 }
+             })),
+             ifProd(new webpack.DefinePlugin({
+                 'process.env':{
+                     'NODE_ENV': JSON.stringify('production')
+                 }
+             })),
+         ]),
+    };
 };
 

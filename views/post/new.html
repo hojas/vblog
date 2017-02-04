@@ -1,0 +1,17 @@
+{% extends "base/base.html" %}
+{% from "components/forms.html" import render_post_form %}
+
+{% block css %}
+<style>
+form textarea.form-control {
+    width: 100%;
+    max-width: 100%;
+    height: 500px;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+    {{ render_post_form('/api/new') }}
+{% endblock %}
+

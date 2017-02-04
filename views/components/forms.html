@@ -1,0 +1,35 @@
+{% macro render_post_form(url, post) %}
+{% if post %}
+    {% set cate = post.category %}
+{% else %}
+    {% set cate = '' %}
+{% endif %}
+
+<form action="{{ url }}" method="post">
+    {% if post %}
+    <input type="hidden" name="url" value="{{ post.url }}">
+    {% endif %}
+    <div class="form-group">
+        <input type="text" class="form-control" name="title" placeholder="标题" value="{{ post and post.title or '' }}">
+    </div>
+    <div class="form-group">
+        <label class="radio-inline">
+            <input type="radio" name="category" {% if cate == 'frontend' %}checked{% endif %} value="frontend"> 前端
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="category" {% if cate == 'nodejs' %}checked{% endif %} value="nodejs"> Node.js
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="category" {% if cate == 'programming' %}checked{% endif %} value="programming"> 编程
+        </label>
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="tags" placeholder="标签" value="{{ post and post.tags or '' }}">
+    </div>
+    <div class="form-group">
+        <textarea class="form-control" name="content">{{ post and post.content or '' }}</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">发布</button>
+</form>
+{% endmacro %}
+

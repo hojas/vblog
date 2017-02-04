@@ -30,3 +30,5 @@ node_modules
 .sass-cache
 app/public/.sass-cache
 
+dist
+dest
