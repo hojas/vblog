@@ -1,3 +1,4 @@
+import pangu from 'pangu';
 import { Post } from '../models';
 
 export default function postRoutes(router) {
@@ -62,11 +63,13 @@ export default function postRoutes(router) {
     router.post('/api/new', async (ctx, next) => {
         let body = ctx.request.body;
         let tags = body.tags.replace(/\s+/g, '').split(',');
+        let title = pangu.spacing(body.title);
+        let content = pangu.spacing(body.content);
 
         let post = {
-            title: body.title,
             category: body.category,
-            content: body.content.trim(),
+            title,
+            content,
             tags,
         };
         let res = await Post.add(post);
