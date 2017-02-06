@@ -1,6 +1,7 @@
 import moment from 'moment';
 import marked from 'marked';
 import hljs from 'highlight.js';
+import pangu from 'pangu';
 import { Category } from '../models';
 
 const renderer = new marked.Renderer();
@@ -20,7 +21,7 @@ marked.setOptions({
 moment.locale('zh-cn');
 
 export default {
-    marked: value => marked(value),
+    marked: value => marked(pangu.spacing(value)),
     prettyDate: value => moment(value).format('ll'),
     getCateName: async value => {
         let res = await Category.findByUrl(value);
