@@ -59,38 +59,5 @@ export default function postRoutes(router) {
 
         return ctx.render('post/edit', { user, ...res });
     });
-
-    router.post('/api/new', async (ctx, next) => {
-        let body = ctx.request.body;
-        let tags = body.tags.replace(/\s+/g, '').split(',');
-        let title = pangu.spacing(body.title);
-        let content = pangu.spacing(body.content);
-
-        let post = {
-            category: body.category,
-            title,
-            content,
-            tags,
-        };
-        let res = await Post.add(post);
-
-        ctx.redirect(`/${res.post.url}.html`);
-    });
-
-    router.post('/api/edit', async (ctx, next) => {
-        let body = ctx.request.body;
-        let postUrl = body.url;
-        let tags = body.tags.replace(/\s+/g, '').split(',');
-
-        let post = {
-            title: body.title,
-            category: body.category,
-            content: body.content.trim(),
-            tags,
-        };
-
-        await Post.edit(postUrl, post);
-        ctx.redirect(`/${postUrl}.html`);
-    });
 }
 

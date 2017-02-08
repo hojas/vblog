@@ -67,8 +67,8 @@ postSchema.statics.add = async function(post) {
     };
 };
 
-postSchema.statics.edit = async function(postUrl, post) {
-    await Post.update({ url: postUrl }, { $set: { ...post } });
+postSchema.statics.edit = async function(post) {
+    await Post.update({ url: post.url }, { $set: { ...post } });
 
     return {
         status: 'success',
