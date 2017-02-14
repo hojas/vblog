@@ -8,11 +8,14 @@ module.exports = env => {
 
     return {
         entry: {
-            app: './src/app.js',
+            app: './src/client/app.js',
+            vendor: ['vue'],
         },
         output: {
-            path: resolve(__dirname, 'dist'),
+            publicPath: '/dist/',
+            path: resolve(__dirname, 'static/dist/js'),
             filename: '[name].js',
+            chunkFilename: '[id].js',
             pathinfo: !env.prod,
         },
         devtool: env.prod ? 'source-map' : 'eval',
@@ -22,21 +25,50 @@ module.exports = env => {
                     test: /\.js$/,
                     loader: 'babel-loader',
                     exclude: /node_modules/,
+                }, {
+                    test: /\.vue$/,
+                    loader: 'vue-loader',
+                    options: {
+                        loaders: {
+                            scss: 'vue-style-loader!style-loader!css-loader!sass-loader',
+                            sass: 'vue-style-loader!style-loader!css-loader!sass-loader?indentedSyntax',
+                        },
+                    },
+                }, {
+                    test: /\.css$/,
+                    loader: 'style-loader!css-loader!sass-loader',
+                }, {
+                    test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
+                    loader: 'file-loader',
+                }, {
+                    test: /\.(png|jpe?g|gif|svg)(\?\S*)?$/,
+                    loader: 'file-loader',
+                    query: {
+                        name: '[name].[ext]?[hash]',
+                    },
                 },
             ],
         },
+        resolve: {
+            alias: {
+                'vue$': 'vue/dist/vue.common.js'
+            }
+        },
         plugins: removeEmpty([
-             ifProd(new webpack.optimize.UglifyJsPlugin({
-                 compress:{
-                     warnings: true
-                 }
-             })),
-             ifProd(new webpack.DefinePlugin({
-                 'process.env':{
-                     'NODE_ENV': JSON.stringify('production')
-                 }
-             })),
-         ]),
+            new webpack.optimize.CommonsChunkPlugin({
+                names: ['vendor', 'manifest'],
+            }),
+            ifProd(new webpack.optimize.UglifyJsPlugin({
+                compress:{
+                    warnings: true
+                }
+            })),
+            ifProd(new webpack.DefinePlugin({
+                'process.env': {
+                    'NODE_ENV': JSON.stringify('production')
+                }
+            })),
+        ]),
     };
 };
 

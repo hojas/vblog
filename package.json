@@ -6,6 +6,7 @@
   "scripts": {
     "build": "babel src -d dist",
     "start": "nodemon --watch dist ./dist/app.js",
+    "build:js": "webpack --env.prod --progress --colors",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,6 +25,7 @@
   "dependencies": {
     "babel-polyfill": "^6.22.0",
     "highlight.js": "^9.9.0",
+    "isomorphic-fetch": "^2.2.1",
     "koa": "^2.0.0-alpha.7",
     "koa-bodyparser": "^3.2.0",
     "koa-convert": "^1.2.0",
@@ -32,10 +34,13 @@
     "koa-send": "^3.3.0",
     "koa-session": "^3.4.0",
     "koa-slash": "^0.2.0",
+    "lodash": "^4.17.4",
     "marked": "^0.3.6",
     "moment": "^2.17.1",
-    "mongoose": "^4.7.7",
-    "pangu": "^3.3.0"
+    "mongoose": "^4.8.2",
+    "pangu": "^3.3.0",
+    "vue": "^2.1.10",
+    "vue-server-renderer": "^2.1.10"
   },
   "devDependencies": {
     "babel-cli": "^6.22.2",
@@ -43,7 +48,15 @@
     "babel-loader": "^6.2.10",
     "babel-preset-latest": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
+    "css-loader": "^0.26.1",
+    "file-loader": "^0.10.0",
+    "node-sass": "^4.5.0",
     "nodemon": "^1.11.0",
-    "webpack": "^2.2.0"
+    "sass-loader": "^5.0.1",
+    "style-loader": "^0.13.1",
+    "vue-loader": "^10.3.0",
+    "vue-style-loader": "^2.0.0",
+    "vue-template-loader": "^0.2.2",
+    "webpack": "^2.2.1"
   }
 }

@@ -1,0 +1,2 @@
+import './pages/details.js';
+
