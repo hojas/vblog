@@ -55,20 +55,19 @@ postSchema.statics.findByUrl = async function(url) {
 };
 
 postSchema.statics.add = async function(post) {
-    let p = new Post(post);
     let posts = await this.find({});
-    p.url = posts.length + 1 + '';
+    post.url = posts.length + 1 + '';
 
-    await p.save();
+    await post.save();
     return {
         status: 'success',
         msg: '文章发布成功',
-        post: p,
+        post,
     };
 };
 
 postSchema.statics.edit = async function(post) {
-    await Post.update({ url: post.url }, { $set: { ...post } });
+    await this.update({ url: post.url }, { $set: { ...post } });
 
     return {
         status: 'success',

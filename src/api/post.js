@@ -14,12 +14,12 @@ export default function postAPI(router) {
         content = pangu.spacing(content);
         tags = tags.replace(/\s+/g, '').split(',');
 
-        let post = {
+        let post = new Post({
             title,
             content,
             category,
             tags,
-        };
+        });
 
         let res = await Post.add(post);
 
