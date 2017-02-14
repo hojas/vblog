@@ -18,12 +18,13 @@ export default function userAPI(router) {
         }
     });
 
-    /*
-    router.post('/api/register', async (ctx, next) => {
-        let username = ctx.request.body.username;
-        let email = ctx.request.body.email;
-        let password = ctx.request.body.password;
-        let repassword = ctx.request.body.repassword;
+    router.post('/api/signup', async (ctx, next) => {
+        let {
+            username,
+            email,
+            password,
+            repassword,
+        } = ctx.request.body;
 
         if (password !== repassword) {
             ctx.redirect('/signup', { status: 'error', msg: '两次密码不一致', user: null });
@@ -34,15 +35,14 @@ export default function userAPI(router) {
             email,
             password,
         });
+
         let res = await User.add(ctx, user);
 
         if (res.status === 'success') {
-            ctx.redirect('/', ...res);
+            return ctx.redirect('/', ...res);
         }
-        if (res.status === 'error') {
-            ctx.redirect('/signup', ...res);
-        }
+
+        return ctx.redirect('/signup', ...res);
     });
-    */
 }
 

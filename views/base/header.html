@@ -25,6 +25,12 @@
         <ul class="nav navbar-nav navbar-right">
             <li><a>欢迎，{{ user.username }}</a></li>
             <li><a href="/new">写文章</a></li>
+            <li><a href="/logout">退出</a></li>
+        </ul>
+        {% else %}
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="/signin">登录</a></li>
+            <li><a href="/signup">注册</a></li>
         </ul>
         {% endif %}
     </div>

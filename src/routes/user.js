@@ -15,7 +15,6 @@ export default function userRoutes(router) {
         return ctx.redirect('/');
     });
 
-    /*
     router.get('/signup', async (ctx, next) => {
         let user = ctx.session.user;
         if (user) {
@@ -23,6 +22,5 @@ export default function userRoutes(router) {
         }
         return ctx.render('sign/signup', {});
     });
-    */
 }
 

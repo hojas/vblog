@@ -93,8 +93,12 @@ export default {
         },
     },
     async created() {
-        this.comment.postUrl = /\d+/.exec(window.location.pathname)[0];
-        await this.getComments();
+        let pathname = window.location.pathname;
+
+        if (/\d+/.test(pathname)) {
+            this.comment.postUrl = /\d+/.exec(pathname)[0];
+            await this.getComments();
+        }
     },
 }
 </script>
