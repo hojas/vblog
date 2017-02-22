@@ -10,7 +10,7 @@ export default function postRoutes(router) {
         if (res.status === 'error') {
             return next();
         } else {
-            return ctx.render('post/posts', { user, ...res, current_cate: cate });
+            return ctx.render('post/posts', { ...res, user, current_cate: cate });
         }
     });
 
@@ -22,7 +22,7 @@ export default function postRoutes(router) {
         if (res.status === 'error') {
             return next();
         } else {
-            return ctx.render('post/posts', { user, ...res });
+            return ctx.render('post/posts', { ...res, user });
         }
     });
 

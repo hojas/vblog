@@ -15,7 +15,13 @@ export default function routes(app) {
     router.get('/', async (ctx, next) => {
         let res = await Post.findByCate();
         let { user } = ctx.session;
-        return ctx.render('home', { user, ...res, current_cate: 'index' });
+        return ctx.render('home', { ...res, user, current_cate: 'index' });
+    });
+    router.get('/page/:page', async (ctx, next) => {
+        let page = ctx.params.page;
+        let res = await Post.findByCate(null, page);
+        let  { user } = ctx.session;
+        return ctx.render('home', { ...res, user, current_cate: 'index' });
     });
 
     initAPI(router);

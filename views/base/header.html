@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-default">
 <div class="container">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
@@ -20,6 +20,9 @@
             <li {% if current_cate == 'nodejs' %}class="active"{% endif %}>
                 <a href="/nodejs">Node.js</a>
             </li>
+            <li {% if current_cate == 'programming' %}class="active"{% endif %}>
+                <a href="/programming">编程</a>
+            </li>
         </ul>
         {% if user %}
         <ul class="nav navbar-nav navbar-right">
@@ -30,7 +33,7 @@
         {% else %}
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/signin">登录</a></li>
-            <li><a href="/signup">注册</a></li>
+            {#<li><a href="/signup">注册</a></li>#}
         </ul>
         {% endif %}
     </div>

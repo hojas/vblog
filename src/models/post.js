@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate';
 import { Category } from './category';
 import { Tag } from './tag';
 
@@ -13,7 +14,9 @@ const postSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now },
 });
 
-postSchema.statics.findByCate = async function(cateUrl) {
+postSchema.plugin(mongoosePaginate);
+
+postSchema.statics.findByCate = async function(cateUrl, page=1) {
     let cate = { category: cateUrl };
 
     if (cateUrl) {
@@ -26,12 +29,14 @@ postSchema.statics.findByCate = async function(cateUrl) {
         cate = {};
     }
 
-    let posts = await this.find(cate).sort({ createdAt: -1 });
-
-    return { posts };
+    return this.paginate(cate, {
+        page,
+        limit: 15,
+        sort: { createdAt: -1 },
+    });
 };
 
-postSchema.statics.findByTag = async function(tag) {
+postSchema.statics.findByTag = async function(tag, page=1) {
     if (tag) {
         let res = await Tag.findByName(tag);
         if (res.status === 'error') {
@@ -39,8 +44,11 @@ postSchema.statics.findByTag = async function(tag) {
         }
     }
 
-    let posts = await this.find({ tags: { $in: [tag] } }).sort({ createdAt: -1 });
-    return { posts };
+    return this.paginate({ tags: { $in: [tag] }}, {
+        page,
+        limit: 15,
+        sort: { cratedAt: -1 },
+    });
 };
 
 postSchema.statics.findByUrl = async function(url) {

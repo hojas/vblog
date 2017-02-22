@@ -4,6 +4,6 @@ import Comment from '../components/comment.vue';
 
 const app = new Vue({
     el: '#comment',
-    render: h => h(Comment)
+    render: h => h(Comment),
 });
 
