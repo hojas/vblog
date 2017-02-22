@@ -13,6 +13,21 @@ export default function postRoutes(router) {
             return ctx.render('post/posts', { ...res, user, current_cate: cate });
         }
     });
+    router.get('/:cate/page/:page', async (ctx, next) => {
+        let { cate, page } = ctx.params;
+        let { user } = ctx.session;
+        let res = await Post.findByCate(cate, page);
+
+        if (res.status === 'error' || res.page > res.pages) {
+            ctx.status = 404;
+            return ctx.render('errors/notFound', { user });
+        }
+        return ctx.render('post/posts', {
+            ...res,
+            user,
+            current_cate: cate,
+        });
+    });
 
     router.get('/tag/:tag', async (ctx, next) => {
         let tag = ctx.params.tag;
@@ -24,6 +39,20 @@ export default function postRoutes(router) {
         } else {
             return ctx.render('post/posts', { ...res, user });
         }
+    });
+    router.get('/tag/:tag/page/:page', async (ctx, next) => {
+        let { tag, page } = ctx.params;
+        let { user } = ctx.session;
+        let res = await Post.findByTag(tag);
+
+        if (res.status === 'error' || res.page > res.pages) {
+            ctx.status = 404;
+            return ctx.render('errors/notFound', { user });
+        }
+        return ctx.render('post/posts', {
+            ...res,
+            user,
+        });
     });
 
     router.get('/:url.html', async (ctx, next) => {

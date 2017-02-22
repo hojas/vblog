@@ -21,7 +21,17 @@ export default function routes(app) {
         let page = ctx.params.page;
         let res = await Post.findByCate(null, page);
         let  { user } = ctx.session;
-        return ctx.render('home', { ...res, user, current_cate: 'index' });
+
+        if (res.status === 'error' || res.page > res.pages) {
+            ctx.status = 404;
+            return ctx.render('errors/notFound', { user });
+        }
+
+        return ctx.render('home', {
+            ...res,
+            user,
+            current_cate: 'index'
+        });
     });
 
     initAPI(router);

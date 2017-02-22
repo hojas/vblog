@@ -29,6 +29,10 @@ postSchema.statics.findByCate = async function(cateUrl, page=1) {
         cate = {};
     }
 
+    if (page < 1) {
+        return { status: 'error' };
+    }
+
     return this.paginate(cate, {
         page,
         limit: 15,
@@ -42,6 +46,10 @@ postSchema.statics.findByTag = async function(tag, page=1) {
         if (res.status === 'error') {
             return res;
         }
+    }
+
+    if (page < 1) {
+        return { status: 'error' };
     }
 
     return this.paginate({ tags: { $in: [tag] }}, {
