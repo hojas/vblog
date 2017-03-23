@@ -4,9 +4,10 @@
   "description": "My blog build with Koa2.",
   "main": "index.js",
   "scripts": {
-    "build": "babel src -d dist",
+    "build:server": "babel src -d dist",
     "start": "nodemon --watch dist ./dist/app.js",
     "build:js": "webpack --env.prod --progress --colors",
+    "build": "npm run build:server && npm run build:js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -15,7 +15,7 @@ import filters from './utils/filters';
 const app = new Koa();
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/kblog');
+mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection.on('error', console.error.bind(console, '连接数据库失败'));
 
 app.use(koaSlash());
