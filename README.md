@@ -6,7 +6,7 @@ Markdown and syntax highlight supported.
 
 ## Requirements
 
-1. Node.js 6.x
+1. Node.js 7.x
 2. MongoDB
 3. Koa2
 4. Vue2
@@ -21,4 +21,3 @@ Markdown and syntax highlight supported.
 3. Run docker service: `sudo service docker start`
 3. Build docker image: `docker-compose build`
 4. Run app in docker: `docker-compose up -d`
-
