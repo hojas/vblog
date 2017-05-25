@@ -33,7 +33,5 @@ app.use(async (ctx, next) => {
 
 routes(app);
 
-app.listen(8080, () => {
-//    console.log('Server is running on 8080');
-});
+app.listen(8080, () => console.log('Server is running on 8080'));
 

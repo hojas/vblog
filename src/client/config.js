@@ -1,0 +1,4 @@
+const api = {
+    baseUrl: '/api/',
+};
+

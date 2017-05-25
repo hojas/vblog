@@ -8,7 +8,7 @@ const categorySchema = new mongoose.Schema({
 
 categorySchema.statics.findAll = async function() {
     let cates = await this.find();
-    return cates;
+    return { ok: true, cates };
 };
 
 categorySchema.statics.findByUrl = async function(url) {

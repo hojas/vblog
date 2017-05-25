@@ -28,5 +28,5 @@ services:
         volumes:
             - ./:/opt/app
         working_dir: /opt/app
-        command: sh -c 'SASS_BINARY_SITE=https://npm.taobao.org/mirrors/node-sass/ npm install --registry=https://registry.npm.taobao.org; npm run build; npm start'
+        command: sh -c 'npm start'
 

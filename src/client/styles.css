@@ -1,0 +1,35 @@
+body {
+    font-family: 'Microsoft Yahei';
+    font-size: 16px;
+}
+h2, h3, h4 {
+    padding: 0;
+    margin: 20px 0;
+    font-weight: 500;
+}
+h2 {
+    font-size: 28px;
+}
+h3 {
+    font-size: 24px;
+}
+h4 {
+    font-size: 18px;
+}
+table {
+    max-width: 100%;
+    margin: 20px auto;
+    border: solid 1px #ddd;
+}
+table th {
+    border-top: 0;
+}
+table th {
+    padding: 4px 10px;
+}
+table tbody th,
+table tbody td {
+    padding: 4px 10px;
+    border: solid 1px #ddd;
+}
+

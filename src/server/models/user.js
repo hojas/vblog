@@ -10,14 +10,15 @@ const userSchema = new mongoose.Schema({
 userSchema.statics.add = async function(ctx, user) {
     let document = await this.findOne({ email: user.email });
     if (document) {
-        return { status: 'error', msg: '此邮箱已注册' };
+        return { ok: false, msg: '此邮箱已注册' };
     }
 
     user.password = md5(user.password);
     let u = await user.save();
     user.password = null;
     ctx.session.user = user;
-    return { status: 'success', msg: '注册成功', user };
+
+    return { ok: true, msg: '注册成功', user };
 };
 
 userSchema.statics.login = async function(ctx, email, password) {
@@ -28,12 +29,12 @@ userSchema.statics.login = async function(ctx, email, password) {
             user.password = null;
             ctx.session.user = user;
 
-            return { status: 'success', msg: '登录成功', user };
+            return { ok: true, msg: '登录成功', user };
         }
-        return { status: 'error', msg: '密码错误', user };
+        return { ok: false, msg: '密码错误', user };
     }
 
-    return { status: 'error', msg: '邮箱未注册', user };
+    return { ok: false, msg: '邮箱未注册', user };
 };
 
 let User = mongoose.model('User', userSchema);

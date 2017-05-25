@@ -23,21 +23,22 @@ postSchema.statics.findByCate = async function(cateUrl, page=1) {
         let res = await Category.findByUrl(cateUrl);
 
         if (res.status === 'error') {
-            return res;
+            return { ok: false };
         }
     } else {
         cate = {};
     }
 
     if (page < 1) {
-        return { status: 'error' };
+        return { ok: true, posts: [] };
     }
 
-    return this.paginate(cate, {
+    let posts = await this.paginate(cate, {
         page,
         limit: 15,
         sort: { createdAt: -1 },
     });
+    return { ok: true, posts };
 };
 
 postSchema.statics.findByTag = async function(tag, page=1) {
@@ -60,14 +61,15 @@ postSchema.statics.findByTag = async function(tag, page=1) {
 };
 
 postSchema.statics.findByUrl = async function(url) {
+    console.log('url', url)
     let post = await this.findOne({ url });
 
     if (post) {
         post.views++;
         post.save();
-        return { post };
+        return { ok: true, post };
     }
-    return { status: 'error', msg: '没有找到相关文章' };
+    return { ok: false, msg: '没有找到相关文章' };
 };
 
 postSchema.statics.add = async function(post) {
@@ -76,7 +78,7 @@ postSchema.statics.add = async function(post) {
 
     await post.save();
     return {
-        status: 'success',
+        ok: true,
         msg: '文章发布成功',
         post,
     };
