@@ -15,9 +15,9 @@ categorySchema.statics.findByUrl = async function(url) {
     let cate = await this.findOne({ url });
 
     if (cate) {
-        return cate;
+        return { ok: true, cate };
     }
-    return { status: 'error', msg: '此分类不存在' };
+    return { ok: false, msg: '此分类不存在' };
 };
 
 let Category = mongoose.model('Category', categorySchema);

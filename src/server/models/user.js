@@ -28,7 +28,6 @@ userSchema.statics.login = async function(ctx, email, password) {
         if (md5(password) === user.password) {
             user.password = null;
             ctx.session.user = user;
-
             return { ok: true, msg: '登录成功', user };
         }
         return { ok: false, msg: '密码错误', user };

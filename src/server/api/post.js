@@ -1,24 +1,22 @@
 import { Post } from '../models';
 
-export default function postAPI(router) {
-    // api of get
+export default function(router) {
+    // get
     router.get('/api/posts', async (ctx, next) => {
         let page = ctx.query.page || 1;
-        let res = await Post.findByCate(null, page);
-
-        ctx.body = res;
+        ctx.body = await Post.findByCate(null, page);
     });
     router.get('/api/post/:url', async (ctx, next) => {
         let url = ctx.params.url;
-        let res = await Post.findByUrl(url);
-
-        ctx.body = res;
+        ctx.body = await Post.findByUrl(url);
     });
     router.get('/api/cate/:cate', async (ctx, next) => {
         let cate = ctx.params.cate;
-        let res = await Post.findByCate(cate);
-
-        ctx.body = res;
+        ctx.body = await Post.findByCate(cate);
+    });
+    router.get('/api/tag/:tag', async (ctx, next) => {
+        let tag = ctx.params.tag;
+        ctx.body = await Post.findByTag(tag);
     });
 
     // api of post
@@ -49,12 +47,19 @@ export default function postAPI(router) {
             tags,
         });
 
-        let res = await Post.add(post);
+        try {
+            await Post.add(post);
+            ctx.body = {
+                ok: true,
+                post,
+            };
+        } catch (e) {
+            ctx.body = {
+                ok: false,
+                post: null,
+            };
+        }
 
-        ctx.body = {
-            ok: true,
-            post,
-        };
     });
     router.post('/api/edit', async (ctx, next) => {
         let {
@@ -76,12 +81,18 @@ export default function postAPI(router) {
             url,
         };
 
-        await Post.edit(post);
-
-        ctx.body = {
-            ok: true,
-            post,
-        };
+        try {
+            await Post.edit(post);
+            ctx.body = {
+                ok: true,
+                post,
+            };
+        } catch (e) {
+            ctx.body = {
+                ok: false,
+                post: null,
+            };
+        }
     });
 }
 

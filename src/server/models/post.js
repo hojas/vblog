@@ -16,14 +16,13 @@ const postSchema = new mongoose.Schema({
 
 postSchema.plugin(mongoosePaginate);
 
-postSchema.statics.findByCate = async function(cateUrl, page=1) {
+postSchema.statics.findByCate = async function(cateUrl, page = 1) {
     let cate = { category: cateUrl };
 
     if (cateUrl) {
         let res = await Category.findByUrl(cateUrl);
-
-        if (res.status === 'error') {
-            return { ok: false };
+        if (!res.ok) {
+            return res;
         }
     } else {
         cate = {};
@@ -61,7 +60,6 @@ postSchema.statics.findByTag = async function(tag, page=1) {
 };
 
 postSchema.statics.findByUrl = async function(url) {
-    console.log('url', url)
     let post = await this.findOne({ url });
 
     if (post) {

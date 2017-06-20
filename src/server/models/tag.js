@@ -10,20 +10,20 @@ tagSchema.statics.add = async function(tag) {
         return { status: 'error', msg: '此标签已存在' };
     }
 
-    let t = await tag.save();
-    return { status: 'success', msg: '标签添加成功', tag };
+    await tag.save();
+    return { ok: true, msg: '标签添加成功', tag };
 }
 
 tagSchema.statics.findByName = async function(name) {
     if (!name) {
-        return { status: 'error' };
+        return { ok: false, tag: null };
     }
 
     let tag = await this.findOne({ name });
     if (tag) {
         return tag;
     }
-    return { status: 'error', msg: '此标签不存在' };
+    return { ok: false, msg: '此标签不存在', tag: null };
 };
 
 tagSchema.statics.findAll = async function() {

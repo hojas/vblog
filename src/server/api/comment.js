@@ -7,7 +7,7 @@ import { Comment } from '../models';
     moment.locale('zh-cn');
 }
 
-export default function commentAPI(router) {
+export default function(router) {
     router.get('/api/comments/:postUrl', async (ctx, next) => {
         let postUrl = ctx.params.postUrl;
 
@@ -49,8 +49,7 @@ export default function commentAPI(router) {
             },
         });
 
-        let res = await Comment.add(comment);
-        ctx.body = res;
+        ctx.body = await Comment.add(comment);
     });
 }
 

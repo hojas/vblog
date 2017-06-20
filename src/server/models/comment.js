@@ -10,21 +10,12 @@ const commentSchema = new mongoose.Schema({
 
 commentSchema.statics.add = async function(comment) {
     await comment.save();
-
-    return {
-        status: 'success',
-        msg: '评论成功',
-        comment,
-    };
+    return { ok: true, msg: '评论成功', comment };
 };
 
 commentSchema.statics.findByPost = async function(postUrl) {
     let comments = await this.find({ postUrl }).sort({ createdAt: -1 });
-
-    return {
-        status: 'success',
-        comments,
-    };
+    return { ok: true, comments };
 };
 
 let Comment = mongoose.model('Comment', commentSchema);

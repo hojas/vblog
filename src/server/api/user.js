@@ -1,14 +1,13 @@
 import { User } from '../models';
 
-export default function userAPI(router) {
+export default function(router) {
     router.post('/api/signin', async (ctx, next) => {
         let {
             email,
             password,
         } = ctx.request.body;
 
-        let res = await User.login(ctx, email, password);
-        ctx.body = res;
+        ctx.body = await User.login(ctx, email, password);
     });
 
     router.post('/api/signup', async (ctx, next) => {
@@ -28,12 +27,11 @@ export default function userAPI(router) {
                 password,
             });
 
-            let res = await User.add(ctx, user);
-            ctx.body = res;
+            ctx.body = await User.add(ctx, user);
         }
     });
 
-    router.get('/api/user', async (ctx, next) => {
+    router.get('/api/user', (ctx, next) => {
         if (ctx.session.user) {
             ctx.body = { ok: true, user: ctx.session.user };
         } else {
@@ -41,7 +39,7 @@ export default function userAPI(router) {
         }
     });
 
-    router.get('/api/logout', async (ctx, next) => {
+    router.get('/api/logout', (ctx, next) => {
         delete ctx.session.user;
         ctx.body = { ok: true, msg: '退出成功' };
     });
