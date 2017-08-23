@@ -2,7 +2,7 @@ import 'babel-polyfill';
 import Vue from 'vue';
 import './styles.css';
 
-import App from './views/app.vue';
+import App from './app.vue';
 import router from './router';
 import store from './store';
 

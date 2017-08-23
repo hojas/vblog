@@ -4,13 +4,20 @@
   "description": "My blog build with Koa2 and Vue2.",
   "main": "index.js",
   "scripts": {
+    "precommit": "lint-staged",
     "build:server": "babel src/server -d dist --presets=env,stage-0",
-    "start:vue": "webpack-dev-server",
+    "start:vue": "webpack-dev-server --config webpack.dev.js",
     "start": "node ./dist/app.js",
-    "build:js": "webpack --env.prod --progress --colors",
-    "build:dev": "webpack --env.dev --progress --colors",
-    "build": "npm run build:server && npm run build:js",
+    "build:prod": "webpack --config webpack.prod.js --progress --colors",
+    "build:dev": "webpack --config webpack.dev.js --progress --colors",
+    "build": "npm run build:server && npm run build:prod",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "lint-staged": {
+    ".js": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",
@@ -28,7 +35,7 @@
   },
   "homepage": "https://github.com/hojas/blog#readme",
   "dependencies": {
-    "axios": "^0.16.1",
+    "axios": "^0.16.2",
     "babel-polyfill": "^6.23.0",
     "highlight.js": "^9.11.0",
     "koa": "^2.2.0",
@@ -43,27 +50,30 @@
     "mongoose": "^4.10.7",
     "mongoose-paginate": "^5.0.3",
     "pangu": "^3.3.0",
-    "vue": "^2.3.3",
-    "vue-router": "^2.5.3",
-    "vue-server-renderer": "^2.3.3",
+    "vue": "^2.3.4",
+    "vue-router": "^2.6.0",
     "vuex": "^2.3.1"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
-    "babel-core": "^6.24.1",
+    "babel-core": "^6.25.0",
     "babel-loader": "^6.4.1",
-    "babel-preset-env": "^1.4.0",
+    "babel-preset-env": "^1.5.2",
     "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^0.26.4",
-    "extract-text-webpack-plugin": "^2.1.0",
+    "eslint": "^4.5.0",
+    "eslint-plugin-vue": "^3.12.0",
+    "extract-text-webpack-plugin": "^2.1.2",
     "file-loader": "^0.10.1",
     "node-sass": "^4.5.3",
+    "prettier": "^1.5.3",
     "sass-loader": "^5.0.1",
     "style-loader": "^0.13.2",
     "vue-loader": "^10.3.0",
     "vue-style-loader": "^2.0.5",
     "vue-template-loader": "^0.2.4",
-    "webpack": "^2.5.1",
-    "webpack-dev-server": "^2.4.5"
+    "webpack": "^3.0.0",
+    "webpack-dev-server": "^2.5.0",
+    "webpack-merge": "^4.1.0"
   }
 }

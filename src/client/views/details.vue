@@ -1,25 +1,28 @@
 <template>
-    <div class="post">
-        <h2>{{ post.title }}</h2>
-        <div class="post-meta">
-            <span><i class="fa fa-user"></i>{{ post.author }}</span>
-            <span><i class="fa fa-clock-o"></i>{{ date }}</span>
-            <span><i class="fa fa-eye"></i>{{ post.views }}</span>
-            <span>
-                <i class="fa fa-tag"></i>
-                <router-link v-for="tag in post.tags" class="label label-info" :to="'/tag/' + tag">{{ tag }}</router-link>
-            </span>
+    <Container>
+        <div slot="body" class="post">
+            <h2>{{ post.title }}</h2>
+            <div class="post-meta">
+                <span><i class="fa fa-user"></i>{{ post.author }}</span>
+                <span><i class="fa fa-clock-o"></i>{{ date }}</span>
+                <span><i class="fa fa-eye"></i>{{ post.views }}</span>
+                <span>
+                    <i class="fa fa-tag"></i>
+                    <router-link v-for="tag in post.tags" class="label label-info" :to="'/tag/' + tag">{{ tag }}</router-link>
+                </span>
+            </div>
+            <div class="post-content" v-html="content"></div>
+            <div>转载请注明出处：
+                <a href="'http://www.w3clog.com/' + post.url + '.html'">{{ post.title }} - 前端日志网</a>
+            </div>
         </div>
-        <div class="post-content" v-html="content"></div>
-        <div>转载请注明出处：
-            <a href="'http://www.w3clog.com/' + post.url + '.html'">{{ post.title }} - 前端日志网</a>
-        </div>
-    </div>
+    </Container>
 </template>
 
 <script>
 import axios from 'axios';
 import { marked, prettyDate } from '../utils';
+import Container from '../components/container.vue';
 
 export default {
     data() {

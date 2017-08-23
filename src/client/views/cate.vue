@@ -1,12 +1,15 @@
 <template>
-    <div>
-        <List :posts="posts"></List>
-        <Pagination v-if="total > 0" :total="total" :page="page" :pages="pages"></Pagination>
-    </div>
+    <Container>
+        <template slot="body">
+            <List :posts="posts"></List>
+            <Pagination v-if="total > 0" :total="total" :page="page" :pages="pages"></Pagination>
+        </template>
+    </Container>
 </template>
 
 <script>
 import axios from 'axios';
+import Container from '../components/container.vue';
 import List from '../components/list.vue';
 import Pagination from '../components/pagination.vue';
 

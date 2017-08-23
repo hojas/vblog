@@ -16,7 +16,10 @@ export default [{
     component: view('cate'),
 }, {
     // 标签下文章列表页
-    path: '/:tag',
+    path: '/tag/:tag',
+    component: view('tag'),
+}, {
+    path: '/tag/:tag/page/:page',
     component: view('tag'),
 }]
 
