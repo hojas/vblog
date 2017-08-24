@@ -1,29 +1,29 @@
-import axios from 'axios';
+import axios from 'axios'
 
 const state = {
-    data: null
-};
+    data: null,
+}
 
-const getters = {};
+const getters = {}
 
 const mutations = {
     newPost(state, { post }) {
-        state.data = post;
-    }
-};
+        state.data = post
+    },
+}
 
 const actions = {
     async newPost({ commit }, { post }) {
-        let res = await axios.post('/api/new', { ...post });
+        let res = await axios.post('/api/new', { ...post })
 
         if (res.data.ok) {
             commit({
                 type: 'newPost',
                 post: res.data.post,
-            });
+            })
         }
-    }
-};
+    },
+}
 
 export default {
     state,
@@ -31,4 +31,3 @@ export default {
     mutations,
     actions,
 }
-

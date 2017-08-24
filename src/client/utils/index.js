@@ -1,3 +1,2 @@
-export marked from './marked';
-export prettyDate from './prettyDate';
-
+export marked from './marked'
+export prettyDate from './prettyDate'

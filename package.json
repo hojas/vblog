@@ -5,11 +5,10 @@
   "main": "index.js",
   "scripts": {
     "build:server": "webpack --config webpack.server.js --progress --colors",
-    "start:vue": "webpack-dev-server --config webpack.dev.js",
-    "start": "node ./dist/app.js",
-    "build:prod": "webpack --config webpack.prod.js --progress --colors",
     "build:dev": "webpack --config webpack.dev.js --progress --colors",
+    "build:prod": "webpack --config webpack.prod.js --progress --colors",
     "build": "npm run build:server && npm run build:prod",
+    "start": "node dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

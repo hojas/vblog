@@ -1,6 +1,5 @@
 export default function view(name) {
     return resolve => {
-        require([`../views/${name}.vue`], resolve);
-    };
+        require([`../views/${name}.vue`], resolve)
+    }
 }
-

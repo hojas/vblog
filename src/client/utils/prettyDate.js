@@ -1,8 +1,7 @@
-import moment from 'moment';
+import moment from 'moment'
 
-moment.locale('zh-cn');
+moment.locale('zh-cn')
 
 export default function(value) {
-    return moment(value).format('ll');
+    return moment(value).format('ll')
 }
-

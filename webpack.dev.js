@@ -12,14 +12,9 @@ module.exports = Merge(BaseConfig, {
         }),
         new webpack.optimize.UglifyJsPlugin({
             compress:{
-                warnings: true
-            }
+                warnings: true,
+            },
         }),
     ],
-    devServer: {
-        contentBase: resolve(__dirname, './src'),
-        port: 9000,
-        compress: true,
-    },
 })
 

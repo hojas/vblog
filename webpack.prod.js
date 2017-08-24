@@ -11,13 +11,13 @@ module.exports = Merge(BaseConfig, {
         }),
         new webpack.optimize.UglifyJsPlugin({
             compress:{
-                warnings: true
-            }
+                warnings: true,
+            },
         }),
         new webpack.DefinePlugin({
             'process.env': {
-                'NODE_ENV': JSON.stringify('production')
-            }
+                'NODE_ENV': JSON.stringify('production'),
+            },
         }),
     ],
 })
