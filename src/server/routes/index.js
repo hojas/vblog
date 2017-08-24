@@ -1,13 +1,13 @@
-import Router from "koa-router";
-import createApi from "../api";
+import Router from 'koa-router'
+import createApi from '../api'
 
 export default function(app) {
-  const router = new Router();
+    const router = new Router()
 
-  createApi(router);
+    createApi(router)
 
-  router.get("*", async (ctx, next) => {
-    ctx.body = `
+    router.get('*', async (ctx, next) => {
+        ctx.body = `
             <!DOCTYPE html>
             <html>
                 <head>
@@ -34,8 +34,8 @@ export default function(app) {
                     <script src="/dist/app.js"></script>
                 </body>
             </html>
-        `;
-  });
+        `
+    })
 
-  app.use(router.routes()).use(router.allowedMethods());
+    app.use(router.routes()).use(router.allowedMethods())
 }
