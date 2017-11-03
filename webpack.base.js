@@ -1,11 +1,10 @@
 const { resolve } = require('path')
 const webpack = require('webpack')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
     entry: {
-        app: './src/client/app.js',
-        vendor: ['vue']
+        app: './src/app.js',
+        vendor: ['vue', 'vue-router', 'vuex']
     },
     output: {
         path: resolve(__dirname, 'static/dist'),
@@ -14,29 +13,22 @@ module.exports = {
     },
     module: {
         rules: [{
-            enforce: 'pre',
             test: /\.js$/,
             exclude: /node_modules/,
-            loader: 'eslint-loader',
-            options: {
-                fix: true,
-            },
-        }, {
-            test: /\.js$/,
             loader: 'babel-loader',
-            include: [resolve('src')]
         }, {
             test: /\.vue$/,
             loader: 'vue-loader',
             options: {
-                loaders: {
-                    scss: 'vue-style-loader!style-loader!css-loader!sass-loader',
-                    sass: 'vue-style-loader!style-loader!css-loader!sass-loader?indentedSyntax',
-                },
+                extractCSS: true
             },
         }, {
             test: /\.css$/,
-            loader: 'style-loader!css-loader!sass-loader',
+            use: [
+                'style-loader',
+                { loader: 'css-loader', options: { importLoaders: 1 }},
+                'postcss-loader'
+            ]
         }, {
             test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
             loader: 'file-loader',
@@ -50,7 +42,7 @@ module.exports = {
     },
     resolve: {
         alias: {
-            vue$: 'vue/dist/vue.common.ja',
+            vue$: 'vue/dist/vue.esm.js',
         }
     }
 }

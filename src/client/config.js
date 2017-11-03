@@ -1,4 +1,0 @@
-const api = {
-    baseUrl: '/api/',
-};
-

@@ -1,8 +1,7 @@
 {
     "presets": [
-        "stage-0",
-        ["env", {
-            "modules": false
-        }]
-    ]
+        "env",
+        "stage-3"
+    ],
+    "plugins": ["syntax-dynamic-import"]
 }
