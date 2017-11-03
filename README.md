@@ -1,6 +1,6 @@
 # kblog
 
-A simple blog build with Koa and Vue. Server is here: (blog-server)[https://github.com/hojas/blog-server]
+A simple blog build with Koa and Vue. Server is here: [blog-server](https://github.com/hojas/blog-server)
 
 Markdown and syntax highlight supported.
 
