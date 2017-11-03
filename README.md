@@ -1,6 +1,6 @@
 # kblog
 
-A simple blog build with Koa2 and Vue2.
+A simple blog build with Koa and Vue. Server is here: (blog-server)[https://github.com/hojas/blog-server]
 
 Markdown and syntax highlight supported.
 
@@ -18,6 +18,7 @@ Markdown and syntax highlight supported.
 ## Deploy
 
 1. Clone project: `git clone https://github.com/hojas/kblog.git`
+1. Build : `$ npm run build:prod`
 2. Install docker and docker-compose, [read more](https://www.docker.com/)
 3. Run docker service: `sudo service docker start`
 3. Build docker image: `docker-compose build`
