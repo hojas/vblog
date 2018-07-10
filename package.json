@@ -1,75 +1,39 @@
 {
-  "name": "blog",
-  "version": "0.0.1",
-  "description": "My blog build with Koa2 and Vue2.",
+  "name": "vblog",
+  "version": "1.0.0",
+  "description": "A simple blog build with Koa and Vue.",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config webpack.dev.js --progress --colors",
-    "build:prod": "webpack --config webpack.prod.js --progress --colors",
-    "start": "node server",
-    "test": "ava"
-  },
-  "ava": {
-    "require": [
-      "./test/helpers/setup.js"
-    ]
+    "dev": "node src/server",
+    "build": "nuxt build",
+    "start": "NODE_ENV=production node src/server",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hojas/blog.git"
+    "url": "git+https://github.com/hojas/vblog.git"
   },
   "keywords": [
     "koa",
-    "vue",
-    "blog"
+    "vue"
   ],
   "author": "hojas",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/hojas/blog/issues"
+    "url": "https://github.com/hojas/vblog/issues"
   },
-  "homepage": "https://github.com/hojas/blog#readme",
+  "homepage": "https://github.com/hojas/vblog#readme",
   "dependencies": {
-    "axios": "^0.17.0",
-    "babel-polyfill": "^6.26.0",
-    "blog-server": "github:hojas/blog-server",
-    "vue": "^2.5.2",
-    "vue-head": "^2.0.11",
-    "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
-  },
-  "devDependencies": {
-    "ava": "^0.23.0",
-    "babel-core": "^6.26.0",
-    "babel-eslint": "^8.0.1",
-    "babel-loader": "^7.1.2",
-    "babel-plugin-syntax-dynamic-import": "^6.18.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-stage-3": "^6.24.1",
-    "browser-env": "^3.2.1",
-    "css-loader": "^0.28.7",
-    "cssnano": "^3.10.0",
-    "eslint": "^4.10.0",
-    "eslint-config-prettier": "^2.7.0",
-    "eslint-loader": "^1.9.0",
-    "eslint-plugin-prettier": "^2.3.1",
-    "eslint-plugin-vue": "^3.13.0",
-    "extract-text-webpack-plugin": "^3.0.2",
-    "file-loader": "^1.1.5",
-    "postcss-cssnext": "^3.0.2",
-    "postcss-import": "^11.0.0",
-    "postcss-loader": "^2.0.8",
-    "postcss-scss": "^1.0.2",
-    "prettier": "^1.7.4",
-    "require-extension-hooks": "^0.3.2",
-    "require-extension-hooks-babel": "^0.1.1",
-    "require-extension-hooks-vue": "^0.4.1",
-    "sinon": "^4.1.0",
-    "style-loader": "^0.19.0",
-    "vue-loader": "^13.3.0",
-    "vue-style-loader": "^3.0.3",
-    "vue-template-compiler": "^2.5.2",
-    "webpack": "^3.8.1",
-    "webpack-merge": "^4.1.1"
+    "axios": "^0.18.0",
+    "iview": "^2.14.3",
+    "koa": "^2.5.1",
+    "koa-bodyparser": "^4.2.1",
+    "koa-json": "^2.0.2",
+    "koa-logger": "^3.2.0",
+    "koa-router": "^7.4.0",
+    "koa-session": "^5.8.1",
+    "marked": "^0.4.0",
+    "mongoose": "^5.2.2",
+    "nuxt": "^1.4.1"
   }
 }

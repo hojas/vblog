@@ -33,4 +33,5 @@ app/public/.sass-cache
 dist
 dest
 *.swp
+.nuxt
 

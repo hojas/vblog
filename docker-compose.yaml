@@ -4,7 +4,7 @@ services:
         restart: always
         image: nginx
         ports:
-            - "80:80"
+            - '80:80'
         volumes:
             - ./nginx:/etc/nginx/conf.d
         volumes_from:
@@ -24,9 +24,8 @@ services:
         links:
             - mongo
         environment:
-            - MONGODB_URI=mongodb://mongo:27017/kblog
+            - MONGODB_URI=mongodb://mongo:27017/vblog
         volumes:
             - ./:/opt/app
         working_dir: /opt/app
         command: sh -c 'npm start'
-
