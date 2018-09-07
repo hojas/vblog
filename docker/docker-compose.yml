@@ -1,0 +1,37 @@
+version: '3'
+services:
+  nginx:
+    image: nginx
+    ports:
+      - 8080:8080
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - ~/data/vblog:/data/db
+
+  server:
+    restart: always
+    build: ./
+    ports:
+      - 3000:3000
+    volumes:
+      - ../server:/opt/app
+    working_dir: /opt/app
+    command: sh -c 'npm start'
+
+  app:
+    restart: always
+    build: ./
+    ports:
+      - 4000:4000
+    volumes:
+      - ../app:/opt/app
+    working_dir: /opt/app
+    command: sh -c 'npm start'

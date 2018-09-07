@@ -1,0 +1,25 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "HOST=0.0.0.0 PORT=4000 nuxt start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vue"
+  ],
+  "author": "hojas",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "bootstrap-vue": "^2.0.0-rc.11",
+    "nuxt": "^1.4.2"
+  },
+  "devDependencies": {
+    "node-sass": "^4.9.3",
+    "sass-loader": "^7.1.0"
+  }
+}
