@@ -1,6 +1,6 @@
-const Post = require('../models/Post')
-const Category = require('../models/Category')
-const { save, update, remove, findById, findAll } = require('./utils')
+import Post from '../models/Post'
+import Category from '../models/Category'
+import { save, update, remove, findById, findAll } from './utils'
 
 const mapCates = async () => {
   const cates = await Category.find({})
@@ -11,8 +11,8 @@ const mapCates = async () => {
   return catesObj
 }
 
-module.exports = class PostController {
-  static async add(ctx, next) {
+export default class PostController {
+  static async add(ctx) {
     const cates = await mapCates()
     const { title, content, category } = ctx.request.body
     const post = new Post({
@@ -30,7 +30,7 @@ module.exports = class PostController {
     }
   }
 
-  static async update(ctx, next) {
+  static async update(ctx) {
     const cates = await mapCates()
     const { _id, title, content, category } = ctx.request.body
     const post = {
@@ -49,7 +49,7 @@ module.exports = class PostController {
     }
   }
 
-  static async updateContent(ctx, next) {
+  static async updateContent(ctx) {
     const { _id, content } = ctx.request.body
     const post = {
       _id,
@@ -64,7 +64,7 @@ module.exports = class PostController {
     }
   }
 
-  static async remove(ctx, next) {
+  static async remove(ctx) {
     const { _id } = ctx.request.query
     const res = await remove(Post, _id)
     if (res.ok) {

@@ -8,6 +8,7 @@
         <nuxt-link :to="'/category/' + cate.url">{{ cate.name }}</nuxt-link>
       </li>
     </ul>
+    <!--
     <ul class="right-nav">
       <li>
         <nuxt-link to="/signup">注册</nuxt-link>
@@ -16,6 +17,7 @@
         <nuxt-link to="/signin">登录</nuxt-link>
       </li>
     </ul>
+    -->
   </div>
 </template>
 

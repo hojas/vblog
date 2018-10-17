@@ -1,8 +1,8 @@
-const Category = require('../models/Category')
-const { save, update, remove, findAll } = require('./utils')
+import Category from '../models/Category'
+import { save, update, remove, findAll } from './utils'
 
-module.exports = class CategoryController {
-  static async add(ctx, next) {
+export default class CategoryController {
+  static async add(ctx) {
     const { name, url } = ctx.request.body
     const category = new Category({
       name,
@@ -17,7 +17,7 @@ module.exports = class CategoryController {
     }
   }
 
-  static async update(ctx, next) {
+  static async update(ctx) {
     const { _id, name, url } = ctx.request.body
     const category = {
       _id,
@@ -32,9 +32,10 @@ module.exports = class CategoryController {
     }
   }
 
-  static async remove(ctx, next) {
+  static async remove(ctx) {
     const { _id } = ctx.request.query
     const res = await remove(Category, _id)
+
     if (res.ok) {
       ctx.body = { ok: true, message: '删除分类成功' }
     } else {

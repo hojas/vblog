@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "rollup -c",
+    "build": "webpack --progress --colors",
     "start": "node dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,13 +14,20 @@
   "author": "hojas",
   "license": "Apache-2.0",
   "dependencies": {
-    "koa": "^2.5.2",
+    "@babel/polyfill": "^7.0.0",
+    "@koa/cors": "^2.2.2",
+    "koa": "^2.5.3",
     "koa-bodyparser": "^4.2.1",
     "koa-json": "^2.0.2",
     "koa-router": "^7.4.0",
-    "mongoose": "^5.2.9"
+    "mongoose": "^5.3.4"
   },
   "devDependencies": {
-    "rollup": "^0.64.1"
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "babel-loader": "^8.0.4",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-node-externals": "^1.7.2"
   }
 }

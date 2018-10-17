@@ -1,8 +1,8 @@
 //import User from './api/User'
-import Category from './api/Category'
-import Post from './api/Post'
+import Category from '../api/Category'
+import Post from '../api/Post'
 
-module.exports = router => {
+export default router => {
   router
     /*
     .post('/api/users/signup', User.signUp)
