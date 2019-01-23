@@ -4,7 +4,7 @@ A simple blog build with Koa and Vue.
 
 ## Requirements
 
-1. Node.js v8.x
+1. Node.js v10.x
 2. MongoDB
 3. Koa.js
 4. Vue
@@ -15,8 +15,9 @@ A simple blog build with Koa and Vue.
 ## Deploy
 
 1. Clone project: `git clone https://github.com/hojas/vblog.git`
-1. Build : `$ npm run build`
-2. Install docker and docker-compose, [read more](https://www.docker.com/)
-3. Run docker service: `sudo service docker start`
-3. Build docker image: `docker-compose build`
-4. Run app in docker: `docker-compose up -d`
+2. Build client in app dir: `$ npm run build`
+3. Build server in server dir: `$ npm run build`
+4. Install docker and docker-compose, [read more](https://www.docker.com/)
+5. Run docker service: `sudo service docker start`
+6. Build docker image in docker dir: `docker-compose build`
+7. Run app in docker: `docker-compose up -d`
